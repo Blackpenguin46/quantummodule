@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.css": "/quantummodule/static/css/main.31d6cfe0.css",
+    "main.js": "/quantummodule/static/js/main.d683d34a.js",
+    "index.html": "/quantummodule/index.html",
+    "main.d683d34a.js.map": "/quantummodule/static/js/main.d683d34a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31d6cfe0.css",
+    "static/js/main.d683d34a.js"
+  ]
+}
