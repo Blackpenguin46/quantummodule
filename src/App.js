@@ -6,7 +6,6 @@ import QuantumRisks from './modules/QuantumRisks';
 import QuantumSafePractices from './modules/QuantumSafePractices';
 import BusinessAdoption from './modules/BusinessAdoption';
 import ClosingActivity from './modules/ClosingActivity';
-import Quiz from './components/Quiz';
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
         <Route path="/quantum-safe-practices" element={<QuantumSafePractices />} />
         <Route path="/business-adoption" element={<BusinessAdoption />} />
         <Route path="/closing-activity" element={<ClosingActivity />} />
-        <Route path="/quiz" element={<Quiz />} />
       </Routes>
     </Router>
   );
