@@ -2,14 +2,15 @@
   "name": "quantummodule",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://blackpenguin46.github.io/quantummodule/",  // Add this field for GitHub Pages
+  "homepage": "https://blackpenguin46.github.io/quantummodule/",
   "dependencies": {
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-scripts": "5.0.1",
-    "react-router-dom": "^6.0.0"
+    "react-router-dom": "^6.0.0",
+    "react-scripts": "5.0.1"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "gh-pages": "^6.2.0"
   },
   "scripts": {
@@ -17,8 +18,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",  // This builds the app before deploying
-    "deploy": "gh-pages -d build"  // This deploys the build folder to GitHub Pages
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
