@@ -43,7 +43,7 @@ const BusinessAdoption = () => {
         Quantum computing represents a major shift in computational power, with the potential to revolutionize industries by solving complex problems that traditional computers cannot. Its integration into business strategies requires not only technological development but also a deep understanding of how to leverage its capabilities for business transformation.
       </p>
       <p className="module-description">
-        The adoption of quantum computing in business poses a range of challenges, both technical and organizational. According to the **National Institute of Standards and Technology (NIST)**, businesses need to approach quantum integration strategically by preparing their infrastructure, processes, and workforce for the complexities of quantum technology.
+        The adoption of quantum computing in business poses a range of challenges, both technical and organizational. According to the National Institute of Standards and Technology (NIST), businesses need to approach quantum integration strategically by preparing their infrastructure, processes, and workforce for the complexities of quantum technology.
       </p>
 
       <p className="module-description">
@@ -56,11 +56,11 @@ const BusinessAdoption = () => {
       </p>
 
       <p className="module-description">
-        Among industries, **healthcare** stands out as one of the most promising sectors to benefit from quantum computing applications. Quantum computing could revolutionize healthcare by enabling faster drug discovery, improving diagnostic algorithms, and optimizing supply chains. For instance, **quantum-enhanced machine learning** could be used to identify patterns in vast datasets, aiding in personalized medicine and advanced research.
+        Among industries, healthcare stands out as one of the most promising sectors to benefit from quantum computing applications. Quantum computing could revolutionize healthcare by enabling faster drug discovery, improving diagnostic algorithms, and optimizing supply chains. For instance, **quantum-enhanced machine learning** could be used to identify patterns in vast datasets, aiding in personalized medicine and advanced research.
       </p>
 
       <p className="module-description">
-        **Challenges to Business Adoption of Quantum Computing**:
+        Challenges to Business Adoption of Quantum Computing:
         While the potential for quantum computing is vast, businesses face significant barriers to adoption. Some of these include:
         <ul>
           <li><strong>High Initial Investment:</strong> The cost of developing quantum computing infrastructure, both in terms of hardware and talent, can be prohibitive for many organizations.</li>
@@ -70,7 +70,7 @@ const BusinessAdoption = () => {
       </p>
 
       <p className="module-description">
-        **Strategies for Overcoming Adoption Challenges**:
+        Strategies for Overcoming Adoption Challenges:
         To address these challenges, businesses should consider a phased approach to quantum adoption:
         <ul>
           <li><strong>Collaboration with Quantum Experts:</strong> Partnering with quantum computing firms or academic institutions can help businesses gain access to expertise and accelerate the adoption process.</li>

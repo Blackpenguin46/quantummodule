@@ -72,7 +72,7 @@ const QuantumSafePractices = () => {
     <div className="quantum-safe-practices-container">
       <h1 className="module-title">Quantum Safe Practices</h1>
       <p className="module-description">
-        As quantum computers evolve, their ability to break traditional encryption methods grows closer to reality. According to the **NIST Post-Quantum Cryptography Project**, the development of post-quantum cryptographic standards is crucial to safeguard data against quantum-enabled threats. These standards ensure long-term security and resilience for both public and private organizations.
+        As quantum computers evolve, their ability to break traditional encryption methods grows closer to reality. According to the NIST Post-Quantum Cryptography Project, the development of post-quantum cryptographic standards is crucial to safeguard data against quantum-enabled threats. These standards ensure long-term security and resilience for both public and private organizations.
       </p>
 
       <p className="module-description">
