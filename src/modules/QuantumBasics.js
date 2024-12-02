@@ -3,113 +3,99 @@ import './QuantumBasics.css';
 
 const QuantumBasics = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
-  const [answers, setAnswers] = useState({
-    q1: '',
-    q2: '',
-    q3: '',
-    q4: '',
-    q5: '',
-  });
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const questions = [
     {
       question: 'What is Quantum Computing?',
       options: ['Classical Computing', 'Quantum Mechanics', 'Artificial Intelligence'],
       correctAnswer: 'Quantum Mechanics',
-      id: 'q1',
     },
     {
       question: 'What is a qubit?',
       options: ['A bit in classical computing', 'A unit of data storage', 'A quantum bit'],
       correctAnswer: 'A quantum bit',
-      id: 'q2',
     },
     {
       question: 'What does superposition in quantum mechanics refer to?',
       options: ['A particle being in two states at once', 'The probability of an event', 'Quantum entanglement'],
       correctAnswer: 'A particle being in two states at once',
-      id: 'q3',
     },
     {
       question: 'Which algorithm is most associated with quantum computing?',
       options: ['Shor\'s algorithm', 'RSA', 'AES'],
       correctAnswer: 'Shor\'s algorithm',
-      id: 'q4',
     },
     {
       question: 'What is quantum entanglement?',
       options: ['Particles separated by large distances are linked', 'A property of classical systems', 'A type of quantum interference'],
       correctAnswer: 'Particles separated by large distances are linked',
-      id: 'q5',
     }
   ];
 
-  const handleAnswerChange = (questionId, value) => {
-    setAnswers((prevAnswers) => ({
-      ...prevAnswers,
-      [questionId]: value,
-    }));
-  };
-
-  const handleSubmit = () => {
-    let allCorrect = true;
-    questions.forEach((question) => {
-      if (answers[question.id] !== question.correctAnswer) {
-        allCorrect = false;
-      }
-    });
-    setQuizCompleted(true);
-    alert(allCorrect ? 'All answers are correct! Great job!' : 'Some answers are incorrect. Try again!');
+  const handleOptionClick = (option) => {
+    setSelectedAnswer(option);
+    if (option === questions[currentQuestionIndex].correctAnswer) {
+      setTimeout(() => {
+        if (currentQuestionIndex < questions.length - 1) {
+          setCurrentQuestionIndex((prev) => prev + 1);
+        } else {
+          setQuizCompleted(true);
+        }
+        setSelectedAnswer(null);
+      }, 500);
+    }
   };
 
   return (
     <div className="quantum-basics">
       <h1>Quantum Basics</h1>
-      <p>Quantum computing is an advanced field of computing that leverages the principles of quantum mechanics to solve problems that are difficult or impossible for classical computers. Unlike classical bits, which can be in one of two states (0 or 1), quantum bits, or qubits, can be in a superposition of states, meaning they can be both 0 and 1 simultaneously.</p>
+      <p>
+        Quantum computing is a modern way of computing that is based on the science of quantum mechanics and its unbelievable phenomena. It is a beautiful combination of physics, mathematics, computer science, and information theory. It provides high computational power, less energy consumption, and exponential speed over classical computers by controlling the behavior of small physical objects, i.e. microscopic particles like atoms, electrons, photons, etc.
+      </p>
+      <p>
+        This module presents an introduction to the fundamental concepts and some ideas of quantum computing. We start with the origin of traditional computing and discuss the improvements and transformations that have been made due to their limitations until now. Then, we move on to the basic working of quantum computing and the quantum properties it follows, like superposition, entanglement, and interference.
+      </p>
+      <p>
+        To understand the full potential and challenges of a practical quantum computer that can be launched commercially, we cover the architecture, hardware, software, design, types, and algorithms that are specifically required by quantum computers. We also explore the capabilities of quantum computers and their potential impacts on various fields like cybersecurity, traffic optimization, medicine, artificial intelligence, and more.
+      </p>
+      <p>
+        Small-scale quantum computers are currently being developed, and this development is heading toward a great future due to their high potential capabilities and advancements in ongoing research. Before focusing on the significance of general-purpose quantum computers and exploring the power of this emerging technology, it is beneficial to review the origin, potential, and limitations of traditional computing. This background helps us understand the possible challenges in developing this exotic and competitive technology and provides insight into the ongoing progress in this field.
+      </p>
 
-      <p>One of the fundamental principles of quantum mechanics that quantum computing takes advantage of is superposition. This allows quantum computers to process many possibilities at once, which gives them the potential to solve certain problems much faster than classical computers.</p>
-
-      <p>Another key concept in quantum computing is quantum entanglement. This phenomenon occurs when particles become correlated in such a way that the state of one particle instantly affects the state of another, even if they are far apart. Entanglement is a crucial resource for many quantum algorithms, including those used in quantum cryptography.</p>
-
-      <p>Quantum computers also rely on quantum gates, which are operations that manipulate qubits in specific ways. These gates perform mathematical operations on qubits and can be combined to create more complex quantum algorithms.</p>
-
-      <p>Quantum computing is still in its early stages, but it promises to revolutionize fields such as cryptography, optimization, and materials science. As we continue to develop quantum computers, the potential applications are vast and could have a profound impact on various industries.</p>
-
-      {/* Quiz Section */}
+      {/* Quiz section */}
       <div className="quiz-section">
         <h2>Quiz: Test Your Knowledge of Quantum Basics</h2>
-        <form>
-          {questions.map((question) => (
-            <div key={question.id} className="quiz-question">
-              <p>{question.question}</p>
-              {question.options.map((option, index) => (
-                <label key={index}>
-                  <input
-                    type="radio"
-                    name={question.id}
-                    value={option}
-                    checked={answers[question.id] === option}
-                    onChange={() => handleAnswerChange(question.id, option)}
-                  />
+        {!quizCompleted ? (
+          <div className="quiz-question">
+            <h3>{questions[currentQuestionIndex].question}</h3>
+            <div className="options-container">
+              {questions[currentQuestionIndex].options.map((option, index) => (
+                <button
+                  key={index}
+                  className={`quiz-option ${
+                    selectedAnswer === option
+                      ? option === questions[currentQuestionIndex].correctAnswer
+                        ? 'correct'
+                        : 'incorrect'
+                      : ''
+                  }`}
+                  onClick={() => handleOptionClick(option)}
+                  disabled={selectedAnswer !== null}
+                >
                   {option}
-                </label>
+                </button>
               ))}
             </div>
-          ))}
-          <button type="button" onClick={handleSubmit}>Submit Quiz</button>
-        </form>
+          </div>
+        ) : (
+          <p>Quiz Completed! Great job!</p>
+        )}
       </div>
-
-      {/* Result after quiz is completed */}
-      {quizCompleted && (
-        <div className="quiz-result">
-          <p>Quiz Completed! {answers.q1 === 'Quantum Mechanics' && answers.q2 === 'A quantum bit' && answers.q3 === 'A particle being in two states at once' && answers.q4 === 'Shor\'s algorithm' && answers.q5 === 'Particles separated by large distances are linked' ? 'Great job! You got all the answers correct.' : 'Some answers were incorrect. Try again!'}</p>
-        </div>
-      )}
     </div>
   );
 };
 
 export default QuantumBasics;
-
 
