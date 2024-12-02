@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './Quiz.css';
+
 
 const Quiz = ({ questions, onComplete }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
