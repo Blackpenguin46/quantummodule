@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import './QuantumBasics.css'; // Make sure to add the updated CSS
+import './QuantumBasics.css';
+import Quiz from '../components/Quiz'; // Ensure the path is correct
 
 const QuantumBasics = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
-  const [score, setScore] = useState(0);
 
   const questions = [
     {
@@ -30,60 +30,32 @@ const QuantumBasics = () => {
       question: 'What is quantum entanglement?',
       options: ['Particles separated by large distances are linked', 'A property of classical systems', 'A type of quantum interference'],
       correctAnswer: 'Particles separated by large distances are linked',
-    },
+    }
   ];
 
-  const handleAnswer = (questionIndex, answer) => {
-    if (questions[questionIndex].correctAnswer === answer) {
-      setScore(score + 1);
-    }
-
-    if (questionIndex === questions.length - 1) {
-      setQuizCompleted(true);
-    }
-  };
-
   return (
-    <div className="quantum-basics-container">
-      <h1 className="module-title">Quantum Basics</h1>
-      <p className="module-description">Learn the foundational concepts of quantum computing.</p>
+    <div className="quantum-basics">
+      <h1>Quantum Basics</h1>
+      <p>Quantum computing is an advanced field of computing that leverages the principles of quantum mechanics to solve problems that are difficult or impossible for classical computers. Unlike classical bits, which can be in one of two states (0 or 1), quantum bits, or qubits, can be in a superposition of states, meaning they can be both 0 and 1 simultaneously.</p>
 
-      {/* Module Content */}
-      <div className="module-content">
-        <p>
-          This module covers the basics of quantum computing, including key concepts like qubits,
-          quantum gates, superposition, and entanglement.
-        </p>
-      </div>
+      <p>One of the fundamental principles of quantum mechanics that quantum computing takes advantage of is superposition. This allows quantum computers to process many possibilities at once, which gives them the potential to solve certain problems much faster than classical computers.</p>
 
-      {/* Quiz Section */}
+      <p>Another key concept in quantum computing is quantum entanglement. This phenomenon occurs when particles become correlated in such a way that the state of one particle instantly affects the state of another, even if they are far apart. Entanglement is a crucial resource for many quantum algorithms, including those used in quantum cryptography.</p>
+
+      <p>Quantum computers also rely on quantum gates, which are operations that manipulate qubits in specific ways. These gates perform mathematical operations on qubits and can be combined to create more complex quantum algorithms.</p>
+
+      <p>Quantum computing is still in its early stages, but it promises to revolutionize fields such as cryptography, optimization, and materials science. As we continue to develop quantum computers, the potential applications are vast and could have a profound impact on various industries.</p>
+
+      {/* Quiz at the end of the module */}
       <div className="quiz-section">
-        <h2 className="quiz-title">Quiz</h2>
-        {quizCompleted ? (
-          <div className="quiz-completed">
-            <p>
-              🎉 <strong>Quiz Completed!</strong> Your score is <strong>{score}/{questions.length}</strong>.
-            </p>
-          </div>
+        <h2>Quiz: Test Your Knowledge of Quantum Basics</h2>
+        {!quizCompleted ? (
+          <Quiz
+            questions={questions}
+            onComplete={() => setQuizCompleted(true)}
+          />
         ) : (
-          questions.map((question, index) => (
-            <div key={index} className="quiz-question">
-              <p className="question-text">
-                <strong>Q{index + 1}:</strong> {question.question}
-              </p>
-              <div className="options-container">
-                {question.options.map((option, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => handleAnswer(index, option)}
-                    className="quiz-option"
-                  >
-                    {option}
-                  </button>
-                ))}
-              </div>
-            </div>
-          ))
+          <p>Quiz Completed! Great job!</p>
         )}
       </div>
     </div>
