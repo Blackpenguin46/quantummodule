@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './components/LandingPage';
 import QuantumBasics from './modules/QuantumBasics';
 import QuantumRisks from './modules/QuantumRisks';
@@ -23,3 +23,4 @@ function App() {
 }
 
 export default App;
+
