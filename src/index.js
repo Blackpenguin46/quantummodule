@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.css'; // Optional, but make sure it's there if you're using styles
 import App from './App';
-import reportWebVitals from './reportWebVitals';
-
-
+import reportWebVitals from './reportWebVitals'; // Optional
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,4 +11,5 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-reportWebVitals();
+reportWebVitals(); // Optional, for performance monitoring
+
