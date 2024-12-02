@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Use HashRouter here
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Using HashRouter
 import LandingPage from './components/LandingPage';
 import QuantumBasics from './modules/QuantumBasics';
 import QuantumRisks from './modules/QuantumRisks';
@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <div className="app-container">
-        <Sidebar /> {/* Sidebar is now included */}
+        <Sidebar /> {/* Sidebar is now included for navigation */}
         <div className="main-content">
           <Routes>
             <Route path="/" element={<LandingPage />} /> {/* Main page */}
@@ -30,5 +30,6 @@ function App() {
 }
 
 export default App;
+
 
 
