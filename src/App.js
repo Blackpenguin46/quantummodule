@@ -7,7 +7,7 @@ import QuantumSafePractices from './modules/QuantumSafePractices';
 import BusinessAdoption from './modules/BusinessAdoption';
 import ClosingActivity from './modules/ClosingActivity';
 import Sidebar from './components/Sidebar'; // Import Sidebar component
-import './App.css'; // Import global styles
+import './App.css'; // Import any global styles
 
 function App() {
   return (
@@ -16,16 +16,12 @@ function App() {
         <Sidebar /> {/* Sidebar is now included */}
         <div className="main-content">
           <Routes>
-            {/* Default Route to Landing Page */}
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<LandingPage />} /> {/* This is the main page */}
             <Route path="/quantum-basics" element={<QuantumBasics />} />
             <Route path="/quantum-risks" element={<QuantumRisks />} />
             <Route path="/quantum-safe-practices" element={<QuantumSafePractices />} />
             <Route path="/business-adoption" element={<BusinessAdoption />} />
             <Route path="/closing-activity" element={<ClosingActivity />} />
-
-            {/* Fallback route for any unknown paths */}
-            <Route path="*" element={<LandingPage />} />
           </Routes>
         </div>
       </div>
@@ -34,3 +30,4 @@ function App() {
 }
 
 export default App;
+
