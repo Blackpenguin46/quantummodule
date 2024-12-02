@@ -1,96 +1,101 @@
 import React, { useState } from 'react';
-import Quiz from '../components/Quiz'; // Adjust the path according to where your module is located
 import './BusinessAdoption.css';
 
 const BusinessAdoption = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const questions = [
     {
-      question: 'Why should businesses adopt quantum-safe practices?',
-      options: ['To prepare for quantum threats to encryption', 'To increase their computing power', 'To enhance their cybersecurity tools'],
-      correctAnswer: 'To prepare for quantum threats to encryption',
+      question: 'What is the main concern for businesses adopting quantum computing?',
+      options: [
+        'Cost of hardware',
+        'Security vulnerabilities from quantum threats',
+        'Lack of trained professionals',
+      ],
+      correctAnswer: 'Security vulnerabilities from quantum threats',
     },
     {
-      question: 'What is the role of a business in PQC adoption?',
-      options: ['Implementing quantum-safe cryptography systems', 'Building quantum computers', 'Running quantum algorithms'],
-      correctAnswer: 'Implementing quantum-safe cryptography systems',
+      question: 'What is one of the key benefits of adopting quantum-safe practices in business?',
+      options: [
+        'Increased encryption strength against quantum threats',
+        'Reduction in quantum computing costs',
+        'Faster communication over networks',
+      ],
+      correctAnswer: 'Increased encryption strength against quantum threats',
     },
     {
-      question: 'How can quantum computing impact business operations?',
-      options: ['By making classical computers obsolete', 'By disrupting data privacy and security', 'By offering more storage space'],
-      correctAnswer: 'By disrupting data privacy and security',
+      question: 'Which industry can benefit the most from quantum computing?',
+      options: ['Healthcare', 'Entertainment', 'Retail'],
+      correctAnswer: 'Healthcare',
     },
     {
-      question: 'What is the first step for a business in adopting quantum-safe practices?',
-      options: ['Conducting a quantum readiness assessment', 'Purchasing quantum computers', 'Training employees on quantum programming'],
-      correctAnswer: 'Conducting a quantum readiness assessment',
+      question: 'Which quantum computing challenge is businesses most concerned with?',
+      options: ['Developing quantum algorithms', 'Transitioning from classical to quantum systems', 'Quantum hardware availability'],
+      correctAnswer: 'Transitioning from classical to quantum systems',
     },
     {
-      question: 'How does quantum computing affect financial sectors?',
-      options: ['It increases transaction speeds', 'It poses a risk to current encryption methods used in financial systems', 'It replaces blockchain'],
-      correctAnswer: 'It poses a risk to current encryption methods used in financial systems',
+      question: 'What is essential for businesses to secure their systems in the quantum era?',
+      options: [
+        'Investing in quantum-resistant cryptography',
+        'Reducing IT budgets',
+        'Implementing faster classical encryption systems',
+      ],
+      correctAnswer: 'Investing in quantum-resistant cryptography',
     },
-    {
-      question: 'What is one potential use of quantum computing in business?',
-      options: ['Advanced machine learning algorithms', 'Creating quantum-resistant encryption methods', 'Replacing traditional computers'],
-      correctAnswer: 'Advanced machine learning algorithms',
-    },
-    {
-      question: 'Why is the transition to quantum-safe cryptography important for businesses?',
-      options: ['To prepare for quantum computer hacking threats', 'To improve customer service', 'To integrate artificial intelligence'],
-      correctAnswer: 'To prepare for quantum computer hacking threats',
-    },
-    {
-      question: 'Which area of business will be most impacted by quantum computing?',
-      options: ['Customer support', 'Cybersecurity and data protection', 'Marketing'],
-      correctAnswer: 'Cybersecurity and data protection',
-    },
-    {
-      question: 'How can businesses future-proof their cybersecurity infrastructure?',
-      options: ['By adopting quantum-safe encryption algorithms now', 'By relying on traditional encryption methods', 'By ignoring quantum developments'],
-      correctAnswer: 'By adopting quantum-safe encryption algorithms now',
-    },
-    {
-      question: 'Which industry should lead in adopting quantum-safe cryptography?',
-      options: ['Healthcare', 'Financial Services', 'Retail'],
-      correctAnswer: 'Financial Services',
-    }
   ];
 
-  return (
-    <div className="module-container">
-      <h1>Business Adoption of Quantum-Safe Practices</h1>
-      <p>Explore how businesses can adopt quantum-safe practices to prepare for quantum computing's impact on encryption.</p>
-      
-      {/* Module Content */}
-      <div className="module-content">
-        <h2>Why Quantum-Safe Practices Matter</h2>
-        <p>This module covers strategies that businesses can use to adopt quantum-safe cryptography to protect against quantum threats, especially focusing on how businesses in various industries can safeguard their data.</p>
-      </div>
+  const handleOptionClick = (option) => {
+    setSelectedAnswer(option);
+    if (option === questions[currentQuestionIndex].correctAnswer) {
+      setTimeout(() => {
+        if (currentQuestionIndex < questions.length - 1) {
+          setCurrentQuestionIndex((prev) => prev + 1);
+        } else {
+          setQuizCompleted(true);
+        }
+        setSelectedAnswer(null);
+      }, 500);
+    }
+  };
 
-      {/* Quiz at the end of the module */}
-      <div className="quiz-section">
-        {!quizCompleted ? (
-          <Quiz
-            moduleName="Business Adoption of Quantum-Safe Practices"
-            questions={questions}
-            onComplete={() => setQuizCompleted(true)}
-          />
-        ) : (
-          <div className="quiz-completion">
-            <p>Quiz Completed! Great job!</p>
-            <button className="retry-button" onClick={() => setQuizCompleted(false)}>
-              Retry Quiz
-            </button>
+  return (
+    <div>
+      <h1>Business Adoption of Quantum Computing</h1>
+      <p>Learn how businesses are adopting quantum computing and the challenges and opportunities they face.</p>
+
+      {!quizCompleted ? (
+        <div className="quiz-section">
+          <h2>{questions[currentQuestionIndex].question}</h2>
+          <div className="options-container">
+            {questions[currentQuestionIndex].options.map((option, index) => (
+              <button
+                key={index}
+                className={`quiz-option ${
+                  selectedAnswer === option
+                    ? option === questions[currentQuestionIndex].correctAnswer
+                      ? 'correct'
+                      : 'incorrect'
+                    : ''
+                }`}
+                onClick={() => handleOptionClick(option)}
+                disabled={selectedAnswer !== null}
+              >
+                {option}
+              </button>
+            ))}
           </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <p className="quiz-completed-message">Quiz Completed! Great job!</p>
+      )}
     </div>
   );
 };
 
 export default BusinessAdoption;
+
 
 
 

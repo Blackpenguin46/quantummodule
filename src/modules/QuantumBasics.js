@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Quiz from '../components/Quiz';  // Adjust the path according to where your module is located
-import './QuantumBasics.css'
+import './QuantumBasics.css'; // Make sure to add the updated CSS
 
 const QuantumBasics = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [score, setScore] = useState(0);
 
   const questions = [
     {
@@ -31,52 +31,65 @@ const QuantumBasics = () => {
       options: ['Particles separated by large distances are linked', 'A property of classical systems', 'A type of quantum interference'],
       correctAnswer: 'Particles separated by large distances are linked',
     },
-    {
-      question: 'What is a quantum gate?',
-      options: ['A device that operates on classical bits', 'A mathematical operation on qubits', 'A security measure'],
-      correctAnswer: 'A mathematical operation on qubits',
-    },
-    {
-      question: 'Which technology is NOT based on quantum mechanics?',
-      options: ['Laser', 'Classical computer', 'MRI scanner'],
-      correctAnswer: 'Classical computer',
-    },
-    {
-      question: 'What is the Heisenberg Uncertainty Principle?',
-      options: ['You cannot simultaneously know the position and momentum of a particle', 'The existence of a quantum state in a vacuum', 'Quantum energy is finite'],
-      correctAnswer: 'You cannot simultaneously know the position and momentum of a particle',
-    },
-    {
-      question: 'What does "quantum supremacy" mean?',
-      options: ['A quantum computer surpasses a classical computer in all tasks', 'A quantum computer can solve specific problems faster than classical computers', 'A quantum computer replaces classical computing entirely'],
-      correctAnswer: 'A quantum computer can solve specific problems faster than classical computers',
-    },
-    {
-      question: 'What role does quantum cryptography play?',
-      options: ['It’s used for creating quantum computers', 'It secures communications by leveraging quantum mechanics', 'It stores data in a quantum state'],
-      correctAnswer: 'It secures communications by leveraging quantum mechanics',
-    }
   ];
 
+  const handleAnswer = (questionIndex, answer) => {
+    if (questions[questionIndex].correctAnswer === answer) {
+      setScore(score + 1);
+    }
+
+    if (questionIndex === questions.length - 1) {
+      setQuizCompleted(true);
+    }
+  };
+
   return (
-    <div>
-      <h1>Quantum Basics</h1>
-      <p>Learn the foundational concepts of quantum computing.</p>
-      
+    <div className="quantum-basics-container">
+      <h1 className="module-title">Quantum Basics</h1>
+      <p className="module-description">Learn the foundational concepts of quantum computing.</p>
+
       {/* Module Content */}
-      <p>This module covers the basics of quantum computing, including key concepts like qubits, quantum gates, superposition, and entanglement.</p>
-      
-      {/* Quiz at the end of the module */}
-      {!quizCompleted ? (
-        <Quiz
-          questions={questions}
-          onComplete={() => setQuizCompleted(true)}
-        />
-      ) : (
-        <p>Quiz Completed! Great job!</p>
-      )}
+      <div className="module-content">
+        <p>
+          This module covers the basics of quantum computing, including key concepts like qubits,
+          quantum gates, superposition, and entanglement.
+        </p>
+      </div>
+
+      {/* Quiz Section */}
+      <div className="quiz-section">
+        <h2 className="quiz-title">Quiz</h2>
+        {quizCompleted ? (
+          <div className="quiz-completed">
+            <p>
+              🎉 <strong>Quiz Completed!</strong> Your score is <strong>{score}/{questions.length}</strong>.
+            </p>
+          </div>
+        ) : (
+          questions.map((question, index) => (
+            <div key={index} className="quiz-question">
+              <p className="question-text">
+                <strong>Q{index + 1}:</strong> {question.question}
+              </p>
+              <div className="options-container">
+                {question.options.map((option, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleAnswer(index, option)}
+                    className="quiz-option"
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 };
 
 export default QuantumBasics;
+
+
