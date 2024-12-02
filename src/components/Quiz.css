@@ -1,80 +1,94 @@
-/* General Styling for the Quiz */
+/* Container for the entire quiz */
 .quiz-container {
+    padding: 20px;
     background-color: #f4f6f9;
     border-radius: 8px;
-    padding: 20px;
-    max-width: 700px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
     margin: 20px auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
   }
   
+  /* Title and description styling */
   .quiz-header {
-    font-size: 2rem;
-    font-weight: 600;
     text-align: center;
     margin-bottom: 20px;
-    color: #333;
   }
   
+  .quiz-header h2 {
+    font-size: 2rem;
+    color: #3f51b5;
+  }
+  
+  .quiz-header p {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  /* Individual question styling */
   .question {
-    font-size: 1.2rem;
-    margin-bottom: 15px;
-    font-weight: 500;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   }
   
+  .question-text {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Answer options styling */
   .answer-options {
     list-style-type: none;
-    padding: 0;
+    padding-left: 0;
   }
   
   .answer-option {
-    background-color: #fff;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #e8eaf6;
     border-radius: 4px;
-    transition: all 0.3s ease;
+    margin-bottom: 10px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
   .answer-option:hover {
-    background-color: #f1f1f1;
-    border-color: #999;
+    background-color: #c5cae9;
   }
   
   .answer-option.correct {
-    background-color: #4CAF50;
-    color: #fff;
-    border-color: #388e3c;
+    background-color: #4caf50;
+    color: white;
   }
   
   .answer-option.incorrect {
     background-color: #f44336;
-    color: #fff;
-    border-color: #d32f2f;
+    color: white;
   }
   
-  .answer-option.selected {
-    background-color: #e0e0e0;
-  }
-  
+  /* Submit button styling */
   .submit-button {
-    display: inline-block;
+    display: block;
+    width: 100%;
     background-color: #3f51b5;
     color: white;
-    padding: 10px 20px;
+    padding: 12px;
     font-size: 1rem;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     margin-top: 20px;
-    transition: background-color 0.3s ease;
   }
   
   .submit-button:hover {
     background-color: #303f9f;
   }
   
+  /* Results section styling */
   .results {
     text-align: center;
     margin-top: 20px;
@@ -92,7 +106,7 @@
     color: #3f51b5;
   }
   
-  .retry-button {
+  .results .retry-button {
     display: inline-block;
     background-color: #f4f6f9;
     color: #3f51b5;
@@ -105,26 +119,7 @@
     text-decoration: none;
   }
   
-  .retry-button:hover {
+  .results .retry-button:hover {
     background-color: #e8eaf6;
-  }
-  
-  @media (max-width: 768px) {
-    .quiz-container {
-      width: 90%;
-    }
-  
-    .quiz-header {
-      font-size: 1.8rem;
-    }
-  
-    .question {
-      font-size: 1rem;
-    }
-  
-    .submit-button {
-      width: 100%;
-      padding: 12px;
-    }
   }
   
