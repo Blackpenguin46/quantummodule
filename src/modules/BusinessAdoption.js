@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Quiz from '../components/Quiz';  // Adjust the path according to where your module is located
-
+import './BusinessAdoption.css';
 
 const BusinessAdoption = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);

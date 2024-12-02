@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Quiz from '../components/Quiz';  // Adjust the path according to where your module is located
-
+import './QuantumRisks.css';
 
 const QuantumRisks = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
