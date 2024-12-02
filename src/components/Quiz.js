@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import './Quiz.css';
 
-const Quiz = () => {
-  const questions = [
-    { question: 'What is Quantum Computing?', answers: ['Option A', 'Option B', 'Option C', 'Option D'], correct: 0 },
-    { question: 'What does PQC stand for?', answers: ['Option A', 'Option B', 'Option C', 'Option D'], correct: 1 },
-    // Add more questions as needed
-  ];
-
+const Quiz = ({ moduleName, questions }) => {
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
@@ -38,39 +32,42 @@ const Quiz = () => {
   return (
     <div className="quiz-container">
       <div className="quiz-header">
-        <h2>Quantum Computing Quiz</h2>
-        <p>Test your knowledge on quantum computing with this quiz!</p>
+        <h2>{moduleName} Quiz</h2>
+        <p>Test your knowledge on {moduleName.toLowerCase()} with this quiz!</p>
       </div>
       
-      {questions.map((q, index) => (
-        <div key={index} className="question">
-          <div className="question-text">{q.question}</div>
-          <ul className="answer-options">
-            {q.answers.map((answer, i) => (
-              <li
-                key={i}
-                className={`answer-option ${submitted ? (i === q.correct ? 'correct' : (i === selectedAnswers[index] ? 'incorrect' : '')) : ''}`}
-                onClick={() => !submitted && handleSelectAnswer(index, i)}
-              >
-                {answer}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-      
-      {!submitted && <button className="submit-button" onClick={handleSubmit}>Submit</button>}
-      
-      {submitted && (
-        <div className="results">
-          <p>You scored: <span className="score">{score}/{questions.length}</span></p>
-          <p>Your percentage: <span className="score">{percentage}%</span></p>
-          <button className="retry-button" onClick={handleRetry}>Try Again</button>
-        </div>
-      )}
+      <div className="quiz-content">
+        {questions.map((q, index) => (
+          <div key={index} className="question">
+            <div className="question-text">{q.question}</div>
+            <ul className="answer-options">
+              {q.answers.map((answer, i) => (
+                <li
+                  key={i}
+                  className={`answer-option ${submitted ? (i === q.correct ? 'correct' : (i === selectedAnswers[index] ? 'incorrect' : '')) : ''}`}
+                  onClick={() => !submitted && handleSelectAnswer(index, i)}
+                >
+                  {answer}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        
+        {!submitted && <button className="submit-button" onClick={handleSubmit}>Submit</button>}
+        
+        {submitted && (
+          <div className="results">
+            <p>You scored: <span className="score">{score}/{questions.length}</span></p>
+            <p>Your percentage: <span className="score">{percentage}%</span></p>
+            <button className="retry-button" onClick={handleRetry}>Try Again</button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
 export default Quiz;
+
 

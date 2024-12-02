@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Quiz from '../components/Quiz';  // Adjust the path according to where your module is located
+import Quiz from '../components/Quiz'; // Adjust the path according to where your module is located
 import './BusinessAdoption.css';
 
 const BusinessAdoption = () => {
@@ -59,25 +59,37 @@ const BusinessAdoption = () => {
   ];
 
   return (
-    <div>
-      <h1>Business Adoption</h1>
-      <p>Explore how businesses can adopt quantum-safe practices.</p>
+    <div className="module-container">
+      <h1>Business Adoption of Quantum-Safe Practices</h1>
+      <p>Explore how businesses can adopt quantum-safe practices to prepare for quantum computing's impact on encryption.</p>
       
       {/* Module Content */}
-      <p>This module covers strategies businesses can use to adopt quantum-safe cryptography to protect against quantum threats.</p>
-      
+      <div className="module-content">
+        <h2>Why Quantum-Safe Practices Matter</h2>
+        <p>This module covers strategies that businesses can use to adopt quantum-safe cryptography to protect against quantum threats, especially focusing on how businesses in various industries can safeguard their data.</p>
+      </div>
+
       {/* Quiz at the end of the module */}
-      {!quizCompleted ? (
-        <Quiz
-          questions={questions}
-          onComplete={() => setQuizCompleted(true)}
-        />
-      ) : (
-        <p>Quiz Completed! Great job!</p>
-      )}
+      <div className="quiz-section">
+        {!quizCompleted ? (
+          <Quiz
+            moduleName="Business Adoption of Quantum-Safe Practices"
+            questions={questions}
+            onComplete={() => setQuizCompleted(true)}
+          />
+        ) : (
+          <div className="quiz-completion">
+            <p>Quiz Completed! Great job!</p>
+            <button className="retry-button" onClick={() => setQuizCompleted(false)}>
+              Retry Quiz
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
 export default BusinessAdoption;
+
 
