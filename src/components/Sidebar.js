@@ -1,21 +1,49 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // Correct import for Link
+import { NavLink } from 'react-router-dom';
+import './Sidebar.css';
 
 const Sidebar = () => {
   return (
-    <div className="sidebar">
+    <nav className="sidebar">
       <ul>
-        <li><Link to="/">Landing Page</Link></li>
-        <li><Link to="/quantum-basics">Quantum Basics</Link></li>
-        <li><Link to="/quantum-risks">Quantum Risks</Link></li>
-        <li><Link to="/quantum-safe-practices">Quantum Safe Practices</Link></li>
-        <li><Link to="/business-adoption">Business Adoption</Link></li>
-        <li><Link to="/closing-activity">Closing Activity</Link></li>
+        {/* Route to the landing page */}
+        <li>
+          <NavLink to="/" exact activeClassName="active">
+            Quantum Learning Module
+          </NavLink>
+        </li>
+        {/* Other modules */}
+        <li>
+          <NavLink to="/quantum-basics" activeClassName="active">
+            Quantum Basics
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/quantum-risks" activeClassName="active">
+            Quantum Risks
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/quantum-safe-practices" activeClassName="active">
+            Quantum Safe Practices
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/business-adoption" activeClassName="active">
+            Business Adoption
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/closing-activity" activeClassName="active">
+            Closing Activity
+          </NavLink>
+        </li>
       </ul>
-    </div>
+    </nav>
   );
 };
 
 export default Sidebar;
+
 
 
