@@ -1,28 +1,46 @@
 import React, { useState } from 'react';
 
-function Quiz() {
-  const [score, setScore] = useState(0);
-  const [answered, setAnswered] = useState(false);
+const Quiz = ({ questions, onComplete }) => {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [answers, setAnswers] = useState([]);
+  const [showResults, setShowResults] = useState(false);
 
-  const handleAnswer = (isCorrect) => {
-    if (!answered) {
-      setAnswered(true);
-      if (isCorrect) {
-        setScore(score + 1);
-      }
+  const handleAnswer = (answer) => {
+    setAnswers([...answers, answer]);
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      setShowResults(true);
+      onComplete(answers);
     }
   };
 
+  if (showResults) {
+    const correctAnswers = questions.filter(
+      (q, index) => q.correctAnswer === answers[index]
+    ).length;
+    return (
+      <div>
+        <h2>Your score: {correctAnswers}/{questions.length}</h2>
+      </div>
+    );
+  }
+
+  const question = questions[currentQuestionIndex];
+
   return (
     <div>
-      <h1>Quiz: Test Your Knowledge</h1>
-      <p>What is a qubit?</p>
-      <button onClick={() => handleAnswer(true)}>A quantum bit</button>
-      <button onClick={() => handleAnswer(false)}>A classical bit</button>
-
-      <p>Current score: {score}</p>
+      <h3>{question.question}</h3>
+      <div>
+        {question.options.map((option, index) => (
+          <button key={index} onClick={() => handleAnswer(option)}>
+            {option}
+          </button>
+        ))}
+      </div>
     </div>
   );
-}
+};
 
 export default Quiz;
+
