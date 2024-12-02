@@ -65,10 +65,10 @@ function LandingPage() {
         </p>
       </section>
 
-      {/* Next Button */}
+      {/* Begin Module Button */}
       <div className="next-button-container">
         <button className="next-button" onClick={handleNextClick}>
-          Next: Quantum Basics
+          Begin Module
         </button>
       </div>
     </div>
