@@ -49,27 +49,27 @@ const QuantumBasics = () => {
   };
 
   return (
-    <div className="quantum-basics">
-      <h1>Quantum Basics</h1>
-      <p>
+    <div className="quantum-basics-container">
+      <h1 className="module-title">Quantum Basics</h1>
+      <p className="module-description">
         Quantum computing is a modern way of computing that is based on the science of quantum mechanics and its unbelievable phenomena. It is a beautiful combination of physics, mathematics, computer science, and information theory. It provides high computational power, less energy consumption, and exponential speed over classical computers by controlling the behavior of small physical objects, i.e. microscopic particles like atoms, electrons, photons, etc.
       </p>
-      <p>
+      <p className="module-description">
         This module presents an introduction to the fundamental concepts and some ideas of quantum computing. We start with the origin of traditional computing and discuss the improvements and transformations that have been made due to their limitations until now. Then, we move on to the basic working of quantum computing and the quantum properties it follows, like superposition, entanglement, and interference.
       </p>
-      <p>
+      <p className="module-description">
         To understand the full potential and challenges of a practical quantum computer that can be launched commercially, we cover the architecture, hardware, software, design, types, and algorithms that are specifically required by quantum computers. We also explore the capabilities of quantum computers and their potential impacts on various fields like cybersecurity, traffic optimization, medicine, artificial intelligence, and more.
       </p>
-      <p>
+      <p className="module-description">
         Small-scale quantum computers are currently being developed, and this development is heading toward a great future due to their high potential capabilities and advancements in ongoing research. Before focusing on the significance of general-purpose quantum computers and exploring the power of this emerging technology, it is beneficial to review the origin, potential, and limitations of traditional computing. This background helps us understand the possible challenges in developing this exotic and competitive technology and provides insight into the ongoing progress in this field.
       </p>
 
       {/* Quiz section */}
       <div className="quiz-section">
-        <h2>Quiz: Test Your Knowledge of Quantum Basics</h2>
+        <h2 className="quiz-title">Quiz: Test Your Knowledge of Quantum Basics</h2>
         {!quizCompleted ? (
           <div className="quiz-question">
-            <h3>{questions[currentQuestionIndex].question}</h3>
+            <h3 className="question-text">{questions[currentQuestionIndex].question}</h3>
             <div className="options-container">
               {questions[currentQuestionIndex].options.map((option, index) => (
                 <button
@@ -90,7 +90,7 @@ const QuantumBasics = () => {
             </div>
           </div>
         ) : (
-          <p>Quiz Completed! Great job!</p>
+          <p className="quiz-completed">Quiz Completed! Great job!</p>
         )}
       </div>
     </div>

@@ -8,29 +8,29 @@ const QuantumSafePractices = () => {
 
   const questions = [
     {
-      question: 'What algorithm can quantum computers use to factor large numbers?',
-      options: ['Grover\'s algorithm', 'Shor\'s algorithm', 'RSA'],
-      correctAnswer: 'Shor\'s algorithm',
+      question: 'What is the primary goal of post-quantum cryptography?',
+      options: ['To optimize classical encryption methods', 'To develop algorithms resistant to quantum computers', 'To create new hardware for encryption'],
+      correctAnswer: 'To develop algorithms resistant to quantum computers',
     },
     {
-      question: 'Which cryptographic system is most affected by quantum computing?',
-      options: ['Symmetric cryptography', 'Elliptic Curve Cryptography (ECC)', 'Quantum encryption'],
-      correctAnswer: 'Elliptic Curve Cryptography (ECC)',
+      question: 'Which of the following is an example of a post-quantum cryptographic algorithm?',
+      options: ['RSA', 'Lattice-based cryptography', 'AES'],
+      correctAnswer: 'Lattice-based cryptography',
     },
     {
-      question: 'What does Grover\'s algorithm reduce in symmetric cryptography?',
-      options: ['Security level', 'Key length', 'Search time'],
-      correctAnswer: 'Security level',
+      question: 'What does quantum key distribution (QKD) enable?',
+      options: ['Public key encryption', 'Secure communication with quantum-resistant keys', 'Breaking traditional cryptography'],
+      correctAnswer: 'Secure communication with quantum-resistant keys',
     },
     {
-      question: 'What is the main challenge in transitioning to quantum-resistant cryptography?',
-      options: ['Investment in research', 'Finding quantum-resistant algorithms', 'Updating existing infrastructure'],
-      correctAnswer: 'Updating existing infrastructure',
+      question: 'Which is a potential challenge in implementing quantum-safe practices?',
+      options: ['Lack of interest in the cryptographic community', 'Compatibility with existing infrastructure', 'No effective algorithms available'],
+      correctAnswer: 'Compatibility with existing infrastructure',
     },
     {
-      question: 'Which aspect of quantum computing poses a significant threat to data privacy?',
-      options: ['Data decryption capability', 'Quantum key distribution', 'Quantum tunneling'],
-      correctAnswer: 'Data decryption capability',
+      question: 'What is one way quantum-safe practices can be implemented in the short term?',
+      options: ['Using longer encryption keys in current systems', 'Developing quantum computers', 'Using only classical encryption methods'],
+      correctAnswer: 'Using longer encryption keys in current systems',
     }
   ];
 
@@ -49,31 +49,38 @@ const QuantumSafePractices = () => {
   };
 
   return (
-    <div className="quantum-safe-practices">
-      <h1>Quantum Safe Practices</h1>
-      <p>
-        <strong>Shor’s Algorithm and Cryptographic Vulnerability</strong><br />
-        At the heart of the quantum threat to encryption is Shor's algorithm. This quantum algorithm is capable of factoring large integers and computing discrete logarithms in polynomial time, a feat that is infeasible with classical computing for sufficiently large numbers. RSA, ECC, and Diffie-Hellman cryptographic protocols, which underpin the security of most digital communication systems, become vulnerable as a result. Shor's algorithm can theoretically break these systems, compromising the confidentiality and integrity of digital information.
+    <div className="quantum-safe-practices-container">
+      <h1 className="module-title">Quantum Safe Practices</h1>
+      <p className="module-description">
+        As quantum computers become more capable, the need for quantum-safe practices in cryptography is growing. Post-quantum cryptography (PQC) seeks to develop algorithms that are secure against both classical and quantum computing threats. This module explores the fundamental concepts and best practices for maintaining data privacy and security in a post-quantum world.
       </p>
-      <p>
-        <strong>Grover's Algorithm and Symmetric Cryptography</strong><br />
-        While Shor’s algorithm targets asymmetric cryptography, Grover's algorithm presents a subtler but still significant threat to symmetric cryptographic systems, including block ciphers and hash functions. Grover's algorithm achieves a quadratic speedup in searching unsorted databases, effectively reducing the security provided by symmetric keys by half. Although symmetric cryptography is not as directly vulnerable as asymmetric systems, the implications of Grover's algorithm necessitate a doubling of key sizes to maintain current security levels in a quantum computing era.
+
+      <p className="module-description">
+        <strong>Post-Quantum Cryptography (PQC)</strong><br />
+        PQC is a category of cryptographic algorithms designed to withstand attacks from quantum computers. Classical encryption methods like RSA and ECC rely on problems that quantum computers could solve efficiently, making them vulnerable. Therefore, new cryptographic methods are being developed to ensure secure communication even in a quantum-enabled future.
       </p>
-      <p>
-        <strong>Quantum Computing and Data Privacy</strong><br />
-        The threat posed by quantum computing extends beyond the immediate breaking of cryptographic systems; it also introduces challenges to long-term data privacy. Information encrypted with current cryptographic standards could be at risk if quantum computers become capable of breaking these encryption methods. This retrospective decryption capability means that data encrypted today could be decrypted in the future by quantum computers, posing significant risks to data privacy in a post-quantum world.
+
+      <p className="module-description">
+        <strong>Quantum Key Distribution (QKD)</strong><br />
+        QKD is a technique that allows two parties to securely share encryption keys using quantum mechanics. Unlike traditional key distribution methods, QKD ensures that any eavesdropping attempts can be detected by the communicating parties. This provides a significant advantage over classical cryptography in securing communication channels.
       </p>
-      <p>
-        <strong>Importance of Quantum Cryptography</strong><br />
-        The development and adoption of quantum-safe cryptographic methods are essential in mitigating the risks posed by quantum computing to current security systems. Quantum-safe cryptography, such as lattice-based encryption and hash-based signatures, is designed to be resistant to quantum algorithms like Shor’s and Grover’s. By transitioning to quantum-resistant protocols, organizations can secure their digital assets against future quantum threats, ensuring long-term confidentiality, integrity, and authenticity in digital communication and data storage.
+
+      <p className="module-description">
+        <strong>Challenges in Transitioning to Quantum-Safe Practices</strong><br />
+        Transitioning to quantum-safe cryptography poses significant challenges, especially when it comes to compatibility with existing infrastructure. Cryptographic systems must be updated or replaced with quantum-resistant alternatives, and this process requires substantial effort, including auditing current systems and deploying new algorithms. Additionally, quantum-safe practices are still in the early stages of development, with many algorithms not yet fully tested in real-world scenarios.
+      </p>
+
+      <p className="module-description">
+        <strong>Short-Term Solutions</strong><br />
+        While post-quantum cryptography is still evolving, some short-term solutions can help mitigate risks, such as using longer encryption keys or hybrid cryptography (combining classical and quantum-resistant algorithms). These practices help provide an additional layer of security while quantum-safe algorithms mature.
       </p>
 
       {/* Quiz section */}
       <div className="quiz-section">
-        <h2>Quiz: Test Your Knowledge of Quantum Safe Practices</h2>
+        <h2 className="quiz-title">Quiz: Test Your Knowledge of Quantum Safe Practices</h2>
         {!quizCompleted ? (
           <div className="quiz-question">
-            <h3>{questions[currentQuestionIndex].question}</h3>
+            <h3 className="question-text">{questions[currentQuestionIndex].question}</h3>
             <div className="options-container">
               {questions[currentQuestionIndex].options.map((option, index) => (
                 <button
@@ -94,7 +101,7 @@ const QuantumSafePractices = () => {
             </div>
           </div>
         ) : (
-          <p>Quiz Completed! Great job!</p>
+          <p className="quiz-completed">Quiz Completed! Great job!</p>
         )}
       </div>
     </div>
@@ -102,4 +109,3 @@ const QuantumSafePractices = () => {
 };
 
 export default QuantumSafePractices;
-
