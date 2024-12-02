@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Correct HashRouter import
+import { HashRouter as Router, Routes, Route } from 'react-router-dom'; // Use HashRouter here
 import LandingPage from './components/LandingPage';
 import QuantumBasics from './modules/QuantumBasics';
 import QuantumRisks from './modules/QuantumRisks';
@@ -7,16 +7,16 @@ import QuantumSafePractices from './modules/QuantumSafePractices';
 import BusinessAdoption from './modules/BusinessAdoption';
 import ClosingActivity from './modules/ClosingActivity';
 import Sidebar from './components/Sidebar'; // Import Sidebar component
-import './App.css'; // Import global styles
+import './App.css'; // Import any global styles
 
 function App() {
   return (
     <Router>
       <div className="app-container">
-        <Sidebar /> {/* Sidebar for navigation */}
+        <Sidebar /> {/* Sidebar is now included */}
         <div className="main-content">
           <Routes>
-            <Route path="/" element={<LandingPage />} />
+            <Route path="/" element={<LandingPage />} /> {/* Main page */}
             <Route path="/quantum-basics" element={<QuantumBasics />} />
             <Route path="/quantum-risks" element={<QuantumRisks />} />
             <Route path="/quantum-safe-practices" element={<QuantumSafePractices />} />
@@ -30,6 +30,7 @@ function App() {
 }
 
 export default App;
+
 
 
 

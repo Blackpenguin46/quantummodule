@@ -1,7 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // For navigation to the next module
 import './LandingPage.css'; // Make sure to include your custom CSS file for styling
 
 function LandingPage() {
+  const navigate = useNavigate();
+
+  const handleNextClick = () => {
+    navigate('/quantum-basics'); // Update the path to the next module
+  };
+
   return (
     <div className="landing-page">
       <div className="landing-page-header">
@@ -57,6 +64,13 @@ function LandingPage() {
           Prepare yourself to navigate the future of computing and stay ahead in the ever-evolving tech landscape.
         </p>
       </section>
+
+      {/* Next Button */}
+      <div className="next-button-container">
+        <button className="next-button" onClick={handleNextClick}>
+          Next: Quantum Basics
+        </button>
+      </div>
     </div>
   );
 }
