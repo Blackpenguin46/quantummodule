@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import './QuantumBasics.css';
 
 const QuantumBasics = () => {
-  const [quizCompleted, setQuizCompleted] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const [score, setScore] = useState(0);
 
   const questions = [
     {
@@ -31,66 +31,111 @@ const QuantumBasics = () => {
       question: 'What is quantum entanglement?',
       options: ['Particles separated by large distances are linked', 'A property of classical systems', 'A type of quantum interference'],
       correctAnswer: 'Particles separated by large distances are linked',
-    }
+    },
   ];
 
-  const handleOptionClick = (option) => {
-    setSelectedAnswer(option);
-    if (option === questions[currentQuestionIndex].correctAnswer) {
-      setTimeout(() => {
-        if (currentQuestionIndex < questions.length - 1) {
-          setCurrentQuestionIndex((prev) => prev + 1);
-        } else {
-          setQuizCompleted(true);
-        }
-        setSelectedAnswer(null);
-      }, 500);
-    }
+  const handleOptionSelect = (questionIndex, option) => {
+    setSelectedAnswers((prev) => ({
+      ...prev,
+      [questionIndex]: option,
+    }));
+  };
+
+  const handleSubmit = () => {
+    let newScore = 0;
+    questions.forEach((question, index) => {
+      if (selectedAnswers[index] === question.correctAnswer) {
+        newScore++;
+      }
+    });
+    setScore(newScore);
+    setQuizSubmitted(true);
+  };
+
+  const handleRedo = () => {
+    setSelectedAnswers({});
+    setQuizSubmitted(false);
+    setScore(0);
   };
 
   return (
     <div className="quantum-basics-container">
       <h1 className="module-title">Quantum Basics</h1>
       <p className="module-description">
-        Quantum computing is a modern way of computing that is based on the science of quantum mechanics and its unbelievable phenomena. It is a beautiful combination of physics, mathematics, computer science, and information theory. It provides high computational power, less energy consumption, and exponential speed over classical computers by controlling the behavior of small physical objects, i.e. microscopic particles like atoms, electrons, photons, etc.
-      </p>
-      <p className="module-description">
-        This module presents an introduction to the fundamental concepts and some ideas of quantum computing. We start with the origin of traditional computing and discuss the improvements and transformations that have been made due to their limitations until now. Then, we move on to the basic working of quantum computing and the quantum properties it follows, like superposition, entanglement, and interference.
-      </p>
-      <p className="module-description">
-        To understand the full potential and challenges of a practical quantum computer that can be launched commercially, we cover the architecture, hardware, software, design, types, and algorithms that are specifically required by quantum computers. We also explore the capabilities of quantum computers and their potential impacts on various fields like cybersecurity, traffic optimization, medicine, artificial intelligence, and more.
-      </p>
-      <p className="module-description">
-        Small-scale quantum computers are currently being developed, and this development is heading toward a great future due to their high potential capabilities and advancements in ongoing research. Before focusing on the significance of general-purpose quantum computers and exploring the power of this emerging technology, it is beneficial to review the origin, potential, and limitations of traditional computing. This background helps us understand the possible challenges in developing this exotic and competitive technology and provides insight into the ongoing progress in this field.
+        Quantum computing represents a revolutionary shift in computation, leveraging the principles of quantum mechanics to solve problems that are infeasible for classical computers.
       </p>
 
-      {/* Quiz section */}
+      <div className="module-content">
+        <h2>Key Concepts of Quantum Computing</h2>
+        <p>
+          Traditional computers process information as bits, which are in a state of either 0 or 1. Quantum computers, on the other hand, use *qubits*, which can exist in a superposition of 0 and 1 states simultaneously. This enables quantum computers to process vast amounts of information in parallel.
+        </p>
+        <h3>Core Quantum Principles</h3>
+        <ul>
+          <li>
+            <strong>Superposition:</strong> A quantum particle, like an electron, can exist in multiple states at once. In quantum computing, this means qubits can perform multiple calculations simultaneously.
+          </li>
+          <li>
+            <strong>Entanglement:</strong> When two particles become entangled, the state of one is instantly correlated with the state of the other, regardless of the distance between them. This allows for powerful interconnections in quantum systems.
+          </li>
+          <li>
+            <strong>Interference:</strong> Quantum computers use interference to amplify correct solutions while canceling out incorrect ones, improving computational accuracy.
+          </li>
+        </ul>
+        <h3>Applications of Quantum Computing</h3>
+        <p>
+          Quantum computers are poised to revolutionize fields such as cryptography, optimization, drug discovery, and artificial intelligence. For instance:
+        </p>
+        <ul>
+          <li>
+            <strong>Cryptography:</strong> Quantum algorithms like Shor's algorithm can break widely used encryption systems, such as RSA, by efficiently factoring large numbers.
+          </li>
+          <li>
+            <strong>Optimization:</strong> Quantum systems can solve complex optimization problems in logistics, finance, and engineering faster than classical approaches.
+          </li>
+          <li>
+            <strong>Quantum Simulation:</strong> Simulating quantum systems is essential for advancing material science, chemistry, and physics research.
+          </li>
+        </ul>
+      </div>
+
+      {/* Quiz Section */}
       <div className="quiz-section">
-        <h2 className="quiz-title">Quiz: Test Your Knowledge of Quantum Basics</h2>
-        {!quizCompleted ? (
-          <div className="quiz-question">
-            <h3 className="question-text">{questions[currentQuestionIndex].question}</h3>
-            <div className="options-container">
-              {questions[currentQuestionIndex].options.map((option, index) => (
-                <button
-                  key={index}
-                  className={`quiz-option ${
-                    selectedAnswer === option
-                      ? option === questions[currentQuestionIndex].correctAnswer
-                        ? 'correct'
-                        : 'incorrect'
-                      : ''
-                  }`}
-                  onClick={() => handleOptionClick(option)}
-                  disabled={selectedAnswer !== null}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
+        <h2 className="quiz-title">Quiz: Test Your Knowledge</h2>
+        {!quizSubmitted ? (
+          <div className="quiz-questions">
+            {questions.map((question, index) => (
+              <div key={index} className="quiz-question">
+                <h3 className="question-text">{`${index + 1}. ${question.question}`}</h3>
+                <div className="options-container">
+                  {question.options.map((option, i) => (
+                    <button
+                      key={i}
+                      className={`quiz-option ${
+                        selectedAnswers[index] === option ? 'selected' : ''
+                      }`}
+                      onClick={() => handleOptionSelect(index, option)}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+            <button className="submit-button" onClick={handleSubmit}>
+              Submit Quiz
+            </button>
           </div>
         ) : (
-          <p className="quiz-completed">Quiz Completed! Great job!</p>
+          <div className="quiz-results">
+            <h3 className="results-title">Quiz Completed!</h3>
+            <p className="score-text">
+              You scored {score} out of {questions.length}.
+            </p>
+            <button className="redo-button" onClick={handleRedo}>
+              Redo Quiz
+            </button>
+          </div>
         )}
       </div>
     </div>
@@ -98,4 +143,7 @@ const QuantumBasics = () => {
 };
 
 export default QuantumBasics;
+
+
+
 

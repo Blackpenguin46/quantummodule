@@ -3,8 +3,8 @@ import './QuantumRisks.css';
 
 const QuantumRisks = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [score, setScore] = useState(0);
 
   const questions = [
     {
@@ -31,57 +31,112 @@ const QuantumRisks = () => {
       question: 'Which aspect of quantum computing poses a significant threat to data privacy?',
       options: ['Data decryption capability', 'Quantum key distribution', 'Quantum tunneling'],
       correctAnswer: 'Data decryption capability',
-    }
+    },
   ];
 
-  const handleOptionClick = (option) => {
-    setSelectedAnswer(option);
-    if (option === questions[currentQuestionIndex].correctAnswer) {
-      setTimeout(() => {
-        if (currentQuestionIndex < questions.length - 1) {
-          setCurrentQuestionIndex((prev) => prev + 1);
-        } else {
-          setQuizCompleted(true);
-        }
-        setSelectedAnswer(null);
-      }, 500);
-    }
+  const handleOptionClick = (questionIndex, option) => {
+    setSelectedAnswers({
+      ...selectedAnswers,
+      [questionIndex]: option,
+    });
+  };
+
+  const handleSubmit = () => {
+    let correctAnswersCount = 0;
+    questions.forEach((question, index) => {
+      if (selectedAnswers[index] === question.correctAnswer) {
+        correctAnswersCount += 1;
+      }
+    });
+    setScore(correctAnswersCount);
+    setQuizCompleted(true);
   };
 
   return (
     <div className="quantum-risks-container">
       <h1 className="module-title">Quantum Risks</h1>
       <p className="module-description">
-        The applications of quantum computing extend far beyond cryptography, promising to revolutionize fields such as drug discovery, material science, and complex system simulation. However, its potential to break classical encryption algorithms presents a clear and present danger to cybersecurity, necessitating the development of new cryptographic practices resilient to quantum attacks.
+        Quantum computing offers transformative possibilities but also introduces significant risks, especially to current cryptographic practices. Understanding these risks is essential to prepare for a quantum-secure future.
       </p>
 
-      {/* Quiz section */}
+      <div className="module-content">
+        <h2>Key Risks of Quantum Computing</h2>
+        <p>
+          The rapid advancement of quantum technology poses several challenges, particularly in the realm of cybersecurity. Here are some key risks:
+        </p>
+        <ul>
+          <li>
+            <strong>Breaking Classical Encryption:</strong> Algorithms like Shor's can efficiently factorize large numbers, threatening the security of RSA and ECC, which underpin most modern encryption systems.
+          </li>
+          <li>
+            <strong>Impact on Symmetric Cryptography:</strong> Grover's algorithm halves the effective key length of symmetric algorithms, making 256-bit keys necessary for future-proof encryption.
+          </li>
+          <strong>Data Privacy Risks:</strong> Encrypted data intercepted today can be stored and decrypted in the future by quantum computers, compromising long-term confidentiality.
+        </ul>
+
+        <h3>Challenges in Transitioning to Quantum-Resistant Cryptography</h3>
+        <ul>
+          <li>
+            <strong>Infrastructure Updates:</strong> Many organizations rely on legacy systems that are difficult to update, creating vulnerabilities during the transition.
+          </li>
+          <li>
+            <strong>Standardization:</strong> The development and standardization of quantum-resistant algorithms take time, and adoption across industries can be slow.
+          </li>
+          <li>
+            <strong>Cost:</strong> Upgrading to quantum-safe systems requires significant investment in research, development, and deployment.
+          </li>
+        </ul>
+
+        <h3>Mitigating Quantum Risks</h3>
+        <p>
+          Preparing for the quantum era involves adopting a proactive approach:
+        </p>
+        <ul>
+          <li>
+            Begin transitioning to <strong>Post-Quantum Cryptography (PQC)</strong> standards as they are finalized by organizations like NIST.
+          </li>
+          <li>
+            Implement hybrid cryptographic solutions that combine classical and quantum-resistant algorithms.
+          </li>
+          <li>
+            Increase awareness of quantum risks and provide training to cybersecurity professionals to address emerging challenges.
+          </li>
+        </ul>
+      </div>
+
+      {/* Quiz Section */}
       <div className="quiz-section">
         <h2 className="quiz-title">Quiz: Test Your Knowledge of Quantum Risks</h2>
         {!quizCompleted ? (
           <div className="quiz-question">
-            <h3 className="question-text">{questions[currentQuestionIndex].question}</h3>
-            <div className="options-container">
-              {questions[currentQuestionIndex].options.map((option, index) => (
-                <button
-                  key={index}
-                  className={`quiz-option ${
-                    selectedAnswer === option
-                      ? option === questions[currentQuestionIndex].correctAnswer
-                        ? 'correct'
-                        : 'incorrect'
-                      : ''
-                  }`}
-                  onClick={() => handleOptionClick(option)}
-                  disabled={selectedAnswer !== null}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
+            {questions.map((question, index) => (
+              <div key={index} className="question-container">
+                <h3 className="question-text">{question.question}</h3>
+                <div className="options-container">
+                  {question.options.map((option, optionIndex) => (
+                    <button
+                      key={optionIndex}
+                      className={`quiz-option ${
+                        selectedAnswers[index] === option
+                          ? option === question.correctAnswer
+                            ? 'correct'
+                            : 'incorrect'
+                          : ''
+                      }`}
+                      onClick={() => handleOptionClick(index, option)}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+            <button className="submit-button" onClick={handleSubmit}>Submit</button>
           </div>
         ) : (
-          <p className="quiz-completed">Quiz Completed! Great job!</p>
+          <div className="quiz-completed">
+            <p>Quiz Completed! You scored {score} out of {questions.length}!</p>
+          </div>
         )}
       </div>
     </div>
@@ -89,6 +144,7 @@ const QuantumRisks = () => {
 };
 
 export default QuantumRisks;
+
 
 
 

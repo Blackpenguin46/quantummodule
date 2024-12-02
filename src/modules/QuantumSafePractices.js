@@ -3,13 +3,17 @@ import './QuantumSafePractices.css';
 
 const QuantumSafePractices = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [score, setScore] = useState(0);
 
   const questions = [
     {
       question: 'What is the primary goal of post-quantum cryptography?',
-      options: ['To optimize classical encryption methods', 'To develop algorithms resistant to quantum computers', 'To create new hardware for encryption'],
+      options: [
+        'To optimize classical encryption methods',
+        'To develop algorithms resistant to quantum computers',
+        'To create new hardware for encryption',
+      ],
       correctAnswer: 'To develop algorithms resistant to quantum computers',
     },
     {
@@ -19,60 +23,86 @@ const QuantumSafePractices = () => {
     },
     {
       question: 'What does quantum key distribution (QKD) enable?',
-      options: ['Public key encryption', 'Secure communication with quantum-resistant keys', 'Breaking traditional cryptography'],
+      options: [
+        'Public key encryption',
+        'Secure communication with quantum-resistant keys',
+        'Breaking traditional cryptography',
+      ],
       correctAnswer: 'Secure communication with quantum-resistant keys',
     },
     {
       question: 'Which is a potential challenge in implementing quantum-safe practices?',
-      options: ['Lack of interest in the cryptographic community', 'Compatibility with existing infrastructure', 'No effective algorithms available'],
+      options: [
+        'Lack of interest in the cryptographic community',
+        'Compatibility with existing infrastructure',
+        'No effective algorithms available',
+      ],
       correctAnswer: 'Compatibility with existing infrastructure',
     },
     {
       question: 'What is one way quantum-safe practices can be implemented in the short term?',
-      options: ['Using longer encryption keys in current systems', 'Developing quantum computers', 'Using only classical encryption methods'],
+      options: [
+        'Using longer encryption keys in current systems',
+        'Developing quantum computers',
+        'Using only classical encryption methods',
+      ],
       correctAnswer: 'Using longer encryption keys in current systems',
-    }
+    },
   ];
 
-  const handleOptionClick = (option) => {
-    setSelectedAnswer(option);
-    if (option === questions[currentQuestionIndex].correctAnswer) {
-      setTimeout(() => {
-        if (currentQuestionIndex < questions.length - 1) {
-          setCurrentQuestionIndex((prev) => prev + 1);
-        } else {
-          setQuizCompleted(true);
-        }
-        setSelectedAnswer(null);
-      }, 500);
-    }
+  const handleOptionClick = (questionIndex, option) => {
+    setSelectedAnswers({
+      ...selectedAnswers,
+      [questionIndex]: option,
+    });
+  };
+
+  const handleSubmit = () => {
+    let correctAnswersCount = 0;
+    questions.forEach((question, index) => {
+      if (selectedAnswers[index] === question.correctAnswer) {
+        correctAnswersCount += 1;
+      }
+    });
+    setScore(correctAnswersCount);
+    setQuizCompleted(true);
   };
 
   return (
     <div className="quantum-safe-practices-container">
       <h1 className="module-title">Quantum Safe Practices</h1>
       <p className="module-description">
-        As quantum computers become more capable, the need for quantum-safe practices in cryptography is growing. Post-quantum cryptography (PQC) seeks to develop algorithms that are secure against both classical and quantum computing threats. This module explores the fundamental concepts and best practices for maintaining data privacy and security in a post-quantum world.
+        As quantum computers evolve, their ability to break traditional encryption methods grows closer to reality. According to the **NIST Post-Quantum Cryptography Project**, the development of post-quantum cryptographic standards is crucial to safeguard data against quantum-enabled threats. These standards ensure long-term security and resilience for both public and private organizations.
       </p>
 
       <p className="module-description">
         <strong>Post-Quantum Cryptography (PQC)</strong><br />
-        PQC is a category of cryptographic algorithms designed to withstand attacks from quantum computers. Classical encryption methods like RSA and ECC rely on problems that quantum computers could solve efficiently, making them vulnerable. Therefore, new cryptographic methods are being developed to ensure secure communication even in a quantum-enabled future.
+        NIST has been leading efforts to standardize PQC algorithms that are resistant to attacks from both classical and quantum computers. For instance, lattice-based cryptography has emerged as a strong contender, offering security grounded in complex mathematical problems. The NIST standards aim to finalize a list of approved algorithms by the mid-2020s, ensuring the world can transition securely to quantum-resistant solutions.
       </p>
 
       <p className="module-description">
         <strong>Quantum Key Distribution (QKD)</strong><br />
-        QKD is a technique that allows two parties to securely share encryption keys using quantum mechanics. Unlike traditional key distribution methods, QKD ensures that any eavesdropping attempts can be detected by the communicating parties. This provides a significant advantage over classical cryptography in securing communication channels.
+        QKD is another approach recognized by NIST and international organizations. This method uses quantum mechanics to securely distribute encryption keys. While QKD is promising, NIST emphasizes the need for continued research into integrating QKD with classical systems and its scalability for widespread adoption.
       </p>
 
       <p className="module-description">
         <strong>Challenges in Transitioning to Quantum-Safe Practices</strong><br />
-        Transitioning to quantum-safe cryptography poses significant challenges, especially when it comes to compatibility with existing infrastructure. Cryptographic systems must be updated or replaced with quantum-resistant alternatives, and this process requires substantial effort, including auditing current systems and deploying new algorithms. Additionally, quantum-safe practices are still in the early stages of development, with many algorithms not yet fully tested in real-world scenarios.
+        NIST highlights several challenges, including:
+        <ul>
+          <li><strong>Infrastructure Compatibility:</strong> Retrofitting existing systems to support new algorithms can be costly and complex.</li>
+          <li><strong>Interoperability:</strong> Ensuring seamless communication between quantum-resistant and legacy systems is critical during the transition period.</li>
+          <li><strong>Implementation and Testing:</strong> Algorithms must be rigorously tested in real-world environments to ensure their resilience.</li>
+        </ul>
       </p>
 
       <p className="module-description">
         <strong>Short-Term Solutions</strong><br />
-        While post-quantum cryptography is still evolving, some short-term solutions can help mitigate risks, such as using longer encryption keys or hybrid cryptography (combining classical and quantum-resistant algorithms). These practices help provide an additional layer of security while quantum-safe algorithms mature.
+        NIST recommends hybrid cryptographic models as an interim solution, combining classical encryption methods with quantum-resistant algorithms. Additionally, increasing key sizes for symmetric encryption, such as transitioning to AES-256, can bolster security while awaiting full adoption of post-quantum standards.
+      </p>
+
+      <p className="module-description">
+        <strong>Action Steps for Organizations</strong><br />
+        Organizations should begin auditing their cryptographic systems and planning for a phased transition to PQC. NIST's guidelines suggest collaborating with cybersecurity experts to assess risk levels, prioritize critical systems, and implement quantum-resistant algorithms early in the process.
       </p>
 
       {/* Quiz section */}
@@ -80,28 +110,34 @@ const QuantumSafePractices = () => {
         <h2 className="quiz-title">Quiz: Test Your Knowledge of Quantum Safe Practices</h2>
         {!quizCompleted ? (
           <div className="quiz-question">
-            <h3 className="question-text">{questions[currentQuestionIndex].question}</h3>
-            <div className="options-container">
-              {questions[currentQuestionIndex].options.map((option, index) => (
-                <button
-                  key={index}
-                  className={`quiz-option ${
-                    selectedAnswer === option
-                      ? option === questions[currentQuestionIndex].correctAnswer
-                        ? 'correct'
-                        : 'incorrect'
-                      : ''
-                  }`}
-                  onClick={() => handleOptionClick(option)}
-                  disabled={selectedAnswer !== null}
-                >
-                  {option}
-                </button>
-              ))}
-            </div>
+            {questions.map((question, index) => (
+              <div key={index} className="question-container">
+                <h3 className="question-text">{question.question}</h3>
+                <div className="options-container">
+                  {question.options.map((option, optionIndex) => (
+                    <button
+                      key={optionIndex}
+                      className={`quiz-option ${
+                        selectedAnswers[index] === option
+                          ? option === question.correctAnswer
+                            ? 'correct'
+                            : 'incorrect'
+                          : ''
+                      }`}
+                      onClick={() => handleOptionClick(index, option)}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ))}
+            <button className="submit-button" onClick={handleSubmit}>Submit</button>
           </div>
         ) : (
-          <p className="quiz-completed">Quiz Completed! Great job!</p>
+          <div className="quiz-completed">
+            <p>Quiz Completed! You scored {score} out of {questions.length}!</p>
+          </div>
         )}
       </div>
     </div>
@@ -109,3 +145,5 @@ const QuantumSafePractices = () => {
 };
 
 export default QuantumSafePractices;
+
+
