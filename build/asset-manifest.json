@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/quantummodule/static/css/main.949b3516.css",
+    "main.css": "/quantummodule/static/css/main.5d2ede18.css",
     "main.js": "/quantummodule/static/js/main.877581a8.js",
     "index.html": "/quantummodule/index.html",
-    "main.949b3516.css.map": "/quantummodule/static/css/main.949b3516.css.map",
+    "main.5d2ede18.css.map": "/quantummodule/static/css/main.5d2ede18.css.map",
     "main.877581a8.js.map": "/quantummodule/static/js/main.877581a8.js.map"
   },
   "entrypoints": [
-    "static/css/main.949b3516.css",
+    "static/css/main.5d2ede18.css",
     "static/js/main.877581a8.js"
   ]
 }
