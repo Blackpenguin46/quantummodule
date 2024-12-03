@@ -5,6 +5,7 @@ body {
   color: #333; /* Standard gray for text */
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 /* Container for Quantum Modules */
@@ -218,13 +219,16 @@ body {
 
 /* Media Queries for Responsive Design */
 @media (max-width: 600px) {
-  .quiz-option {
-    flex: 1 1 100%; /* Stack options on smaller screens */
-    max-width: 100%;
+  .quantum-basics-container {
+    padding: 1rem; /* Reduce padding on smaller screens */
   }
 
   .module-title {
     font-size: 2rem;
+  }
+
+  .module-description {
+    font-size: 1rem; /* Smaller text for better readability */
   }
 
   .quiz-title {
@@ -235,9 +239,52 @@ body {
     font-size: 1rem;
   }
 
+  .quiz-option {
+    flex: 1 1 100%; /* Stack options on smaller screens */
+    max-width: 100%;
+  }
+
   .submit-button,
   .redo-button {
     font-size: 1rem;
   }
+
+  .module-navigation {
+    flex-direction: column; /* Stack navigation buttons vertically */
+  }
+
+  .prev-module-button, .next-module-button {
+    width: 100%; /* Full width on smaller screens */
+  }
 }
+
+/* Media Query for Tablets and Larger Devices */
+@media (max-width: 768px) {
+  .quantum-basics-container {
+    max-width: 95%; /* Allow the container to take up more space on tablets */
+  }
+
+  .module-title {
+    font-size: 2.3rem; /* Adjust title size */
+  }
+
+  .quiz-title {
+    font-size: 1.6rem;
+  }
+
+  .question-text {
+    font-size: 1.1rem;
+  }
+
+  .quiz-option {
+    flex: 1 1 calc(50% - 12px); /* Keep two options per row */
+    max-width: calc(50% - 12px);
+  }
+
+  .submit-button,
+  .redo-button {
+    font-size: 1.1rem;
+  }
+}
+
 
