@@ -206,14 +206,16 @@ const QuantumSafePractices = () => {
         </button>
       </div>
       <div className="module-navigation">
-        <Link to="/business-adoption" className="next-module-button">
-          Next Module: Business Adoption
-        </Link>
+        <Link to="/quantum-risks" className="prev-module-button">Previous Module: Quantum Risks</Link>
+        <div className="next-module-container">
+          <Link to="/business-adoption" className="next-module-button">Next Module: Quantum in Business</Link>
+        </div>
       </div>
     </div>
   );
 };
 
 export default QuantumSafePractices;
+
 
 

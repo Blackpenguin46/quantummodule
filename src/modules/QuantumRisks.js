@@ -186,7 +186,7 @@ const QuantumRisks = () => {
 
   return (
     <div className="quantum-basics-container">
-      <h1 className="module-title">Risks of Quantum Computing</h1>
+      <h1 className="module-title">Quantum Risks</h1>
       <div className="progress-bar">
         <div
           className="progress"
@@ -206,15 +206,17 @@ const QuantumRisks = () => {
         </button>
       </div>
       <div className="module-navigation">
-        <Link to="/quantum-safe-practices" className="next-module-button">
-          Next Module: Quantum Safe Practices
-        </Link>
+        <Link to="/quantum-basics" className="prev-module-button">Previous Module: Quantum Basics</Link>
+        <div className="next-module-container">
+          <Link to="/quantum-safe-practices" className="next-module-button">Next Module: Quantum Safe Practices</Link>
+        </div>
       </div>
     </div>
   );
 };
 
 export default QuantumRisks;
+
 
 
 

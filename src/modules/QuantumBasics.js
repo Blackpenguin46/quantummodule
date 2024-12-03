@@ -124,7 +124,7 @@ const QuantumBasics = () => {
   const sections = useMemo(
     () => [
       {
-        title: 'Introduction to Quantum Computing',
+        title: 'Quantum Basics',
         content: (
           <div className="section-content">
             <p>
@@ -186,7 +186,7 @@ const QuantumBasics = () => {
 
   return (
     <div className="quantum-basics-container">
-      <h1 className="module-title">Quantum Basics</h1>
+      <h1 className="module-title">Quantum Risks</h1>
       <div className="progress-bar">
         <div
           className="progress"
@@ -206,16 +206,16 @@ const QuantumBasics = () => {
         </button>
       </div>
       <div className="module-navigation">
-        <Link to="/quantum-risks" className="next-module-button">
-          Next Module: Quantum Risks
-        </Link>
+        <Link to="/" className="prev-module-button">Previous Module: Main Page</Link>
+        <div className="next-module-container">
+          <Link to="/quantum-risks" className="next-module-button">Next Module: Quantum Risks</Link>
+        </div>
       </div>
     </div>
   );
 };
 
 export default QuantumBasics;
-
 
 
 

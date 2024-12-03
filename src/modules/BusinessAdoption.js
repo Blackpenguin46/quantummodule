@@ -205,10 +205,12 @@ const BusinessAdoption = () => {
           Next
         </button>
       </div>
+
       <div className="module-navigation">
-        <Link to="/closing-activity" className="next-module-button">
-          Next Module: Closing Activity
-        </Link>
+        <Link to="/quantum-safe-practices" className="prev-module-button">Previous Module: Quantum Safe Practices</Link>
+        <div className="next-module-container">
+          <Link to="/closing-activity" className="next-module-button">Next Module: Closing Activity</Link>
+        </div>
       </div>
     </div>
   );
