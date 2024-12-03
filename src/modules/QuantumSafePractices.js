@@ -1,144 +1,214 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import './QuantumSafePractices.css';
 
-const QuantumSafePractices = () => {
-  const [quizCompleted, setQuizCompleted] = useState(false);
+const Quiz = ({ questions }) => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [score, setScore] = useState(0);
 
-  const questions = [
-    {
-      question: 'What is the primary goal of post-quantum cryptography?',
-      options: [
-        'To optimize classical encryption methods',
-        'To develop algorithms resistant to quantum computers',
-        'To create new hardware for encryption',
-      ],
-      correctAnswer: 'To develop algorithms resistant to quantum computers',
-    },
-    {
-      question: 'Which of the following is an example of a post-quantum cryptographic algorithm?',
-      options: ['RSA', 'Lattice-based cryptography', 'AES'],
-      correctAnswer: 'Lattice-based cryptography',
-    },
-    {
-      question: 'What does quantum key distribution (QKD) enable?',
-      options: [
-        'Public key encryption',
-        'Secure communication with quantum-resistant keys',
-        'Breaking traditional cryptography',
-      ],
-      correctAnswer: 'Secure communication with quantum-resistant keys',
-    },
-    {
-      question: 'Which is a potential challenge in implementing quantum-safe practices?',
-      options: [
-        'Lack of interest in the cryptographic community',
-        'Compatibility with existing infrastructure',
-        'No effective algorithms available',
-      ],
-      correctAnswer: 'Compatibility with existing infrastructure',
-    },
-    {
-      question: 'What is one way quantum-safe practices can be implemented in the short term?',
-      options: [
-        'Using longer encryption keys in current systems',
-        'Developing quantum computers',
-        'Using only classical encryption methods',
-      ],
-      correctAnswer: 'Using longer encryption keys in current systems',
-    },
-  ];
+  const handleOptionSelect = (index, option) => {
+    setSelectedAnswers({ ...selectedAnswers, [index]: option });
+  };
 
-  const handleOptionClick = (questionIndex, option) => {
-    setSelectedAnswers({
-      ...selectedAnswers,
-      [questionIndex]: option,
-    });
+  const handleNextQuestion = () => {
+    setCurrentQuestion((prev) => Math.min(prev + 1, questions.length - 1));
+  };
+
+  const handlePreviousQuestion = () => {
+    setCurrentQuestion((prev) => Math.max(prev - 1, 0));
   };
 
   const handleSubmit = () => {
-    let correctAnswersCount = 0;
-    questions.forEach((question, index) => {
-      if (selectedAnswers[index] === question.correctAnswer) {
-        correctAnswersCount += 1;
-      }
-    });
-    setScore(correctAnswersCount);
-    setQuizCompleted(true);
+    const calculatedScore = questions.reduce(
+      (total, question, index) => total + (selectedAnswers[index] === question.correctAnswer ? 1 : 0),
+      0
+    );
+    setScore(calculatedScore);
+    setQuizSubmitted(true);
+  };
+
+  const handleRedo = () => {
+    setSelectedAnswers({});
+    setScore(0);
+    setQuizSubmitted(false);
+    setCurrentQuestion(0);
   };
 
   return (
-    <div className="quantum-safe-practices-container">
-      <h1 className="module-title">Quantum Safe Practices</h1>
-      <p className="module-description">
-        As quantum computers evolve, their ability to break traditional encryption methods grows closer to reality. According to the NIST Post-Quantum Cryptography Project, the development of post-quantum cryptographic standards is crucial to safeguard data against quantum-enabled threats. These standards ensure long-term security and resilience for both public and private organizations.
-      </p>
-
-      <p className="module-description">
-        <strong>Post-Quantum Cryptography (PQC)</strong><br />
-        NIST has been leading efforts to standardize PQC algorithms that are resistant to attacks from both classical and quantum computers. For instance, lattice-based cryptography has emerged as a strong contender, offering security grounded in complex mathematical problems. The NIST standards aim to finalize a list of approved algorithms by the mid-2020s, ensuring the world can transition securely to quantum-resistant solutions.
-      </p>
-
-      <p className="module-description">
-        <strong>Quantum Key Distribution (QKD)</strong><br />
-        QKD is another approach recognized by NIST and international organizations. This method uses quantum mechanics to securely distribute encryption keys. While QKD is promising, NIST emphasizes the need for continued research into integrating QKD with classical systems and its scalability for widespread adoption.
-      </p>
-
-      <p className="module-description">
-        <strong>Challenges in Transitioning to Quantum-Safe Practices</strong><br />
-        NIST highlights several challenges, including:
-        <ul>
-          <li><strong>Infrastructure Compatibility:</strong> Retrofitting existing systems to support new algorithms can be costly and complex.</li>
-          <li><strong>Interoperability:</strong> Ensuring seamless communication between quantum-resistant and legacy systems is critical during the transition period.</li>
-          <li><strong>Implementation and Testing:</strong> Algorithms must be rigorously tested in real-world environments to ensure their resilience.</li>
-        </ul>
-      </p>
-
-      <p className="module-description">
-        <strong>Short-Term Solutions</strong><br />
-        NIST recommends hybrid cryptographic models as an interim solution, combining classical encryption methods with quantum-resistant algorithms. Additionally, increasing key sizes for symmetric encryption, such as transitioning to AES-256, can bolster security while awaiting full adoption of post-quantum standards.
-      </p>
-
-      <p className="module-description">
-        <strong>Action Steps for Organizations</strong><br />
-        Organizations should begin auditing their cryptographic systems and planning for a phased transition to PQC. NIST's guidelines suggest collaborating with cybersecurity experts to assess risk levels, prioritize critical systems, and implement quantum-resistant algorithms early in the process.
-      </p>
-
-      {/* Quiz section */}
-      <div className="quiz-section">
-        <h2 className="quiz-title">Quiz: Test Your Knowledge of Quantum Safe Practices</h2>
-        {!quizCompleted ? (
+    <div className="quiz-section">
+      {!quizSubmitted ? (
+        <>
+          <div className="quiz-progress">
+            Question {currentQuestion + 1} of {questions.length}
+          </div>
           <div className="quiz-question">
-            {questions.map((question, index) => (
-              <div key={index} className="question-container">
-                <h3 className="question-text">{question.question}</h3>
-                <div className="options-container">
-                  {question.options.map((option, optionIndex) => (
-                    <button
-                      key={optionIndex}
-                      className={`quiz-option ${
-                        selectedAnswers[index] === option
-                          ? option === question.correctAnswer
-                            ? 'correct'
-                            : 'incorrect'
-                          : ''
-                      }`}
-                      onClick={() => handleOptionClick(index, option)}
-                    >
-                      {option}
-                    </button>
-                  ))}
+            <h3>{questions[currentQuestion].question}</h3>
+            <div className="quiz-options">
+              {questions[currentQuestion].options.map((option, i) => (
+                <button
+                  key={i}
+                  className={`quiz-option ${selectedAnswers[currentQuestion] === option ? 'selected' : ''}`}
+                  onClick={() => handleOptionSelect(currentQuestion, option)}
+                  aria-pressed={selectedAnswers[currentQuestion] === option}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="quiz-navigation">
+            <button onClick={handlePreviousQuestion} disabled={currentQuestion === 0}>
+              Previous
+            </button>
+            {currentQuestion === questions.length - 1 ? (
+              <button
+                className="submit-button"
+                onClick={handleSubmit}
+                disabled={Object.keys(selectedAnswers).length !== questions.length}
+              >
+                Submit Quiz
+              </button>
+            ) : (
+              <button onClick={handleNextQuestion}>
+                Next
+              </button>
+            )}
+          </div>
+        </>
+      ) : (
+        <div className="quiz-results">
+          <h3>Quiz Completed!</h3>
+          <p>Your score is {score} out of {questions.length}.</p>
+          <button className="redo-button" onClick={handleRedo}>
+            Retake Quiz
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const QuantumSafePractices = () => {
+  const [currentSection, setCurrentSection] = useState(0);
+
+  const questions = [
+    {
+      question: 'What is Quantum Computing?',
+      options: ['Classical Computing', 'Quantum Mechanics', 'Artificial Intelligence'],
+      correctAnswer: 'Quantum Mechanics',
+    },
+    {
+      question: 'What is a qubit?',
+      options: ['A bit in classical computing', 'A unit of data storage', 'A quantum bit'],
+      correctAnswer: 'A quantum bit',
+    },
+    {
+      question: 'What does superposition in quantum mechanics refer to?',
+      options: ['A particle being in two states at once', 'The probability of an event', 'Quantum entanglement'],
+      correctAnswer: 'A particle being in two states at once',
+    },
+    {
+      question: 'Which algorithm is most associated with quantum computing?',
+      options: ['Shor\'s algorithm', 'RSA', 'AES'],
+      correctAnswer: 'Shor\'s algorithm',
+    },
+    {
+      question: 'What is quantum entanglement?',
+      options: ['Particles separated by large distances are linked', 'A property of classical systems', 'A type of quantum interference'],
+      correctAnswer: 'Particles separated by large distances are linked',
+    },
+  ];
+
+  const sections = useMemo(
+    () => [
+      {
+        title: 'Risks of Quantum Computing',
+        content: (
+          <div className="section-content">
+            <p>
+              Quantum computing represents a revolutionary shift in computation, leveraging the principles of quantum mechanics to solve problems that are infeasible for classical computers.
+            </p>
+            <p>
+              Traditional computers process information as bits, which are in a state of either 0 or 1. Quantum computers, on the other hand, use <em>qubits</em>, which can exist in a superposition of 0 and 1 states simultaneously. This enables quantum computers to process vast amounts of information in parallel.
+            </p>
+          </div>
+        ),
+      },
+      {
+        title: 'Core Quantum Principles',
+        content: (
+          <div className="section-content">
+            <div className="accordion">
+              <div className="accordion-item">
+                <h3 className="accordion-header">Superposition</h3>
+                <div className="accordion-content">
+                  A quantum particle, like an electron, can exist in multiple states at once. In quantum computing, this means qubits can perform multiple calculations simultaneously.
                 </div>
               </div>
-            ))}
-            <button className="submit-button" onClick={handleSubmit}>Submit</button>
+              <div className="accordion-item">
+                <h3 className="accordion-header">Entanglement</h3>
+                <div className="accordion-content">
+                  When two particles become entangled, the state of one is instantly correlated with the state of the other, regardless of the distance between them. This allows for powerful interconnections in quantum systems.
+                </div>
+              </div>
+              <div className="accordion-item">
+                <h3 className="accordion-header">Interference</h3>
+                <div className="accordion-content">
+                  Quantum computers use interference to amplify correct solutions while canceling out incorrect ones, improving computational accuracy.
+                </div>
+              </div>
+            </div>
           </div>
-        ) : (
-          <div className="quiz-completed">
-            <p>Quiz Completed! You scored {score} out of {questions.length}!</p>
+        ),
+      },
+      {
+        title: 'Applications of Quantum Computing',
+        content: (
+          <div className="section-content">
+            <p>Quantum computers are poised to revolutionize fields such as cryptography, optimization, drug discovery, and artificial intelligence. For instance:</p>
+            <ul>
+              <li><strong>Cryptography:</strong> Quantum algorithms like Shor's algorithm can break widely used encryption systems, such as RSA, by efficiently factoring large numbers.</li>
+              <li><strong>Optimization:</strong> Quantum systems can solve complex optimization problems in logistics, finance, and engineering faster than classical approaches.</li>
+              <li><strong>Quantum Simulation:</strong> Simulating quantum systems is essential for advancing material science, chemistry, and physics research.</li>
+            </ul>
           </div>
-        )}
+        ),
+      },
+      {
+        title: 'Quiz: Test Your Knowledge',
+        content: <Quiz questions={questions} />,
+      },
+    ],
+    [questions]
+  );
+
+  return (
+    <div className="quantum-basics-container">
+      <h1 className="module-title">Quantum Safe Practices</h1>
+      <div className="progress-bar">
+        <div
+          className="progress"
+          style={{ width: `${((currentSection + 1) / sections.length) * 100}%` }}
+        ></div>
+      </div>
+      <div className="module-content">
+        <h2 className="section-title">{sections[currentSection].title}</h2>
+        {sections[currentSection].content}
+      </div>
+      <div className="navigation-buttons">
+        <button onClick={() => setCurrentSection((prev) => Math.max(prev - 1, 0))} disabled={currentSection === 0}>
+          Previous
+        </button>
+        <button onClick={() => setCurrentSection((prev) => Math.min(prev + 1, sections.length - 1))} disabled={currentSection === sections.length - 1}>
+          Next
+        </button>
+      </div>
+      <div className="module-navigation">
+        <Link to="/business-adoption" className="next-module-button">
+          Next Module: Business Adoption
+        </Link>
       </div>
     </div>
   );

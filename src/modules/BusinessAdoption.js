@@ -1,209 +1,214 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import './BusinessAdoption.css';
 
-const BusinessAdoption = () => {
-  const [answers, setAnswers] = useState({
-    q1: '',
-    q2: '',
-    q3: '',
-    q4: '',
-    q5: ''
-  });
+const Quiz = ({ questions }) => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedAnswers, setSelectedAnswers] = useState({});
+  const [quizSubmitted, setQuizSubmitted] = useState(false);
+  const [score, setScore] = useState(0);
 
-  const handleAnswerChange = (e) => {
-    setAnswers({
-      ...answers,
-      [e.target.name]: e.target.value
-    });
+  const handleOptionSelect = (index, option) => {
+    setSelectedAnswers({ ...selectedAnswers, [index]: option });
   };
 
-  const checkAnswers = () => {
-    const correctAnswers = {
-      q1: 'Strategic',
-      q2: 'Healthcare',
-      q3: 'Quantum Team',
-      q4: 'Organizational readiness',
-      q5: 'Cognitive shift'
-    };
+  const handleNextQuestion = () => {
+    setCurrentQuestion((prev) => Math.min(prev + 1, questions.length - 1));
+  };
 
-    let score = 0;
-    for (const question in answers) {
-      if (answers[question] === correctAnswers[question]) {
-        score++;
-      }
-    }
+  const handlePreviousQuestion = () => {
+    setCurrentQuestion((prev) => Math.max(prev - 1, 0));
+  };
 
-    alert(`You scored ${score} out of 5!`);
+  const handleSubmit = () => {
+    const calculatedScore = questions.reduce(
+      (total, question, index) => total + (selectedAnswers[index] === question.correctAnswer ? 1 : 0),
+      0
+    );
+    setScore(calculatedScore);
+    setQuizSubmitted(true);
+  };
+
+  const handleRedo = () => {
+    setSelectedAnswers({});
+    setScore(0);
+    setQuizSubmitted(false);
+    setCurrentQuestion(0);
   };
 
   return (
+    <div className="quiz-section">
+      {!quizSubmitted ? (
+        <>
+          <div className="quiz-progress">
+            Question {currentQuestion + 1} of {questions.length}
+          </div>
+          <div className="quiz-question">
+            <h3>{questions[currentQuestion].question}</h3>
+            <div className="quiz-options">
+              {questions[currentQuestion].options.map((option, i) => (
+                <button
+                  key={i}
+                  className={`quiz-option ${selectedAnswers[currentQuestion] === option ? 'selected' : ''}`}
+                  onClick={() => handleOptionSelect(currentQuestion, option)}
+                  aria-pressed={selectedAnswers[currentQuestion] === option}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div className="quiz-navigation">
+            <button onClick={handlePreviousQuestion} disabled={currentQuestion === 0}>
+              Previous
+            </button>
+            {currentQuestion === questions.length - 1 ? (
+              <button
+                className="submit-button"
+                onClick={handleSubmit}
+                disabled={Object.keys(selectedAnswers).length !== questions.length}
+              >
+                Submit Quiz
+              </button>
+            ) : (
+              <button onClick={handleNextQuestion}>
+                Next
+              </button>
+            )}
+          </div>
+        </>
+      ) : (
+        <div className="quiz-results">
+          <h3>Quiz Completed!</h3>
+          <p>Your score is {score} out of {questions.length}.</p>
+          <button className="redo-button" onClick={handleRedo}>
+            Retake Quiz
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const BusinessAdoption = () => {
+  const [currentSection, setCurrentSection] = useState(0);
+
+  const questions = [
+    {
+      question: 'What is Quantum Computing?',
+      options: ['Classical Computing', 'Quantum Mechanics', 'Artificial Intelligence'],
+      correctAnswer: 'Quantum Mechanics',
+    },
+    {
+      question: 'What is a qubit?',
+      options: ['A bit in classical computing', 'A unit of data storage', 'A quantum bit'],
+      correctAnswer: 'A quantum bit',
+    },
+    {
+      question: 'What does superposition in quantum mechanics refer to?',
+      options: ['A particle being in two states at once', 'The probability of an event', 'Quantum entanglement'],
+      correctAnswer: 'A particle being in two states at once',
+    },
+    {
+      question: 'Which algorithm is most associated with quantum computing?',
+      options: ['Shor\'s algorithm', 'RSA', 'AES'],
+      correctAnswer: 'Shor\'s algorithm',
+    },
+    {
+      question: 'What is quantum entanglement?',
+      options: ['Particles separated by large distances are linked', 'A property of classical systems', 'A type of quantum interference'],
+      correctAnswer: 'Particles separated by large distances are linked',
+    },
+  ];
+
+  const sections = useMemo(
+    () => [
+      {
+        title: 'Risks of Quantum Computing',
+        content: (
+          <div className="section-content">
+            <p>
+              Quantum computing represents a revolutionary shift in computation, leveraging the principles of quantum mechanics to solve problems that are infeasible for classical computers.
+            </p>
+            <p>
+              Traditional computers process information as bits, which are in a state of either 0 or 1. Quantum computers, on the other hand, use <em>qubits</em>, which can exist in a superposition of 0 and 1 states simultaneously. This enables quantum computers to process vast amounts of information in parallel.
+            </p>
+          </div>
+        ),
+      },
+      {
+        title: 'Core Quantum Principles',
+        content: (
+          <div className="section-content">
+            <div className="accordion">
+              <div className="accordion-item">
+                <h3 className="accordion-header">Superposition</h3>
+                <div className="accordion-content">
+                  A quantum particle, like an electron, can exist in multiple states at once. In quantum computing, this means qubits can perform multiple calculations simultaneously.
+                </div>
+              </div>
+              <div className="accordion-item">
+                <h3 className="accordion-header">Entanglement</h3>
+                <div className="accordion-content">
+                  When two particles become entangled, the state of one is instantly correlated with the state of the other, regardless of the distance between them. This allows for powerful interconnections in quantum systems.
+                </div>
+              </div>
+              <div className="accordion-item">
+                <h3 className="accordion-header">Interference</h3>
+                <div className="accordion-content">
+                  Quantum computers use interference to amplify correct solutions while canceling out incorrect ones, improving computational accuracy.
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        title: 'Applications of Quantum Computing',
+        content: (
+          <div className="section-content">
+            <p>Quantum computers are poised to revolutionize fields such as cryptography, optimization, drug discovery, and artificial intelligence. For instance:</p>
+            <ul>
+              <li><strong>Cryptography:</strong> Quantum algorithms like Shor's algorithm can break widely used encryption systems, such as RSA, by efficiently factoring large numbers.</li>
+              <li><strong>Optimization:</strong> Quantum systems can solve complex optimization problems in logistics, finance, and engineering faster than classical approaches.</li>
+              <li><strong>Quantum Simulation:</strong> Simulating quantum systems is essential for advancing material science, chemistry, and physics research.</li>
+            </ul>
+          </div>
+        ),
+      },
+      {
+        title: 'Quiz: Test Your Knowledge',
+        content: <Quiz questions={questions} />,
+      },
+    ],
+    [questions]
+  );
+
+  return (
     <div className="quantum-basics-container">
-      <h1 className="module-title">Business Adoption of Quantum Computing</h1>
-      <p className="module-description">
-        Quantum computing represents a major shift in computational power, with the potential to revolutionize industries by solving complex problems that traditional computers cannot. Its integration into business strategies requires not only technological development but also a deep understanding of how to leverage its capabilities for business transformation.
-      </p>
-      <p className="module-description">
-        The adoption of quantum computing in business poses a range of challenges, both technical and organizational. According to the National Institute of Standards and Technology (NIST), businesses need to approach quantum integration strategically by preparing their infrastructure, processes, and workforce for the complexities of quantum technology.
-      </p>
-
-      <p className="module-description">
-        Key aspects of business adoption include:
-        <ul>
-          <li><strong>Strategic Planning:</strong> Quantum computing is not just a technological upgrade; it requires a comprehensive strategy that aligns with the company's long-term goals. This involves assessing the potential impact on existing business models and identifying areas where quantum algorithms can offer a competitive advantage.</li>
-          <li><strong>Organizational Readiness:</strong> Businesses must ensure that their organizational structures are equipped to handle the complexity of quantum computing. This includes building a skilled workforce and fostering an environment conducive to innovation.</li>
-          <li><strong>Cognitive Shift:</strong> Quantum computing requires a fundamental shift in how problems are approached. This includes moving away from traditional models of computation to a new paradigm where quantum algorithms are used to process information in ways that classical systems cannot.</li>
-        </ul>
-      </p>
-
-      <p className="module-description">
-        Among industries, healthcare stands out as one of the most promising sectors to benefit from quantum computing applications. Quantum computing could revolutionize healthcare by enabling faster drug discovery, improving diagnostic algorithms, and optimizing supply chains. For instance, **quantum-enhanced machine learning** could be used to identify patterns in vast datasets, aiding in personalized medicine and advanced research.
-      </p>
-
-      <p className="module-description">
-        Challenges to Business Adoption of Quantum Computing:
-        While the potential for quantum computing is vast, businesses face significant barriers to adoption. Some of these include:
-        <ul>
-          <li><strong>High Initial Investment:</strong> The cost of developing quantum computing infrastructure, both in terms of hardware and talent, can be prohibitive for many organizations.</li>
-          <li><strong>Quantum Software Development:</strong> Developing software that can effectively leverage quantum computing power requires specialized knowledge, and the ecosystem for quantum software is still emerging.</li>
-          <li><strong>Integration with Existing Systems:</strong> Integrating quantum technologies with current systems presents challenges, as it requires new architectures and potentially rethinking entire business processes.</li>
-        </ul>
-      </p>
-
-      <p className="module-description">
-        Strategies for Overcoming Adoption Challenges:
-        To address these challenges, businesses should consider a phased approach to quantum adoption:
-        <ul>
-          <li><strong>Collaboration with Quantum Experts:</strong> Partnering with quantum computing firms or academic institutions can help businesses gain access to expertise and accelerate the adoption process.</li>
-          <li><strong>Hybrid Quantum-Classical Solutions:</strong> In the short term, companies can integrate quantum computing with classical systems. This hybrid approach enables businesses to use quantum computing for specific tasks while maintaining traditional systems for other operations.</li>
-          <li><strong>Talent Development:</strong> Nurturing a workforce skilled in quantum computing is essential for ensuring long-term success. This involves not only hiring experts but also providing training for existing employees to understand the new computational paradigms.</li>
-        </ul>
-      </p>
-
-      <div className="quiz-section">
-        <h2 className="quiz-title">Quiz</h2>
-        <p>Answer the following questions to test your understanding:</p>
-
-        <div className="quiz-question">
-          <p className="question-text">1. What is a strategic challenge in adopting quantum computing in businesses?</p>
-          <div className="options-container">
-            <button
-              className="quiz-option"
-              name="q1"
-              value="Technological"
-              onClick={handleAnswerChange}
-            >Technological</button>
-            <button
-              className="quiz-option"
-              name="q1"
-              value="Strategic"
-              onClick={handleAnswerChange}
-            >Strategic</button>
-            <button
-              className="quiz-option"
-              name="q1"
-              value="Operational"
-              onClick={handleAnswerChange}
-            >Operational</button>
-          </div>
-        </div>
-
-        <div className="quiz-question">
-          <p className="question-text">2. Which industry is highlighted as benefiting greatly from quantum applications?</p>
-          <div className="options-container">
-            <button
-              className="quiz-option"
-              name="q2"
-              value="Healthcare"
-              onClick={handleAnswerChange}
-            >Healthcare</button>
-            <button
-              className="quiz-option"
-              name="q2"
-              value="Finance"
-              onClick={handleAnswerChange}
-            >Finance</button>
-            <button
-              className="quiz-option"
-              name="q2"
-              value="Education"
-              onClick={handleAnswerChange}
-            >Education</button>
-          </div>
-        </div>
-
-        <div className="quiz-question">
-          <p className="question-text">3. What is the proposed solution for overcoming quantum adoption challenges?</p>
-          <div className="options-container">
-            <button
-              className="quiz-option"
-              name="q3"
-              value="Quantum Hub"
-              onClick={handleAnswerChange}
-            >Quantum Hub</button>
-            <button
-              className="quiz-option"
-              name="q3"
-              value="Quantum Team"
-              onClick={handleAnswerChange}
-            >Quantum Team</button>
-            <button
-              className="quiz-option"
-              name="q3"
-              value="Quantum Experts"
-              onClick={handleAnswerChange}
-            >Quantum Experts</button>
-          </div>
-        </div>
-
-        <div className="quiz-question">
-          <p className="question-text">4. What capability is needed in the healthcare industry for quantum adoption?</p>
-          <div className="options-container">
-            <button
-              className="quiz-option"
-              name="q4"
-              value="Organizational readiness"
-              onClick={handleAnswerChange}
-            >Organizational readiness</button>
-            <button
-              className="quiz-option"
-              name="q4"
-              value="Technological readiness"
-              onClick={handleAnswerChange}
-            >Technological readiness</button>
-            <button
-              className="quiz-option"
-              name="q4"
-              value="Market readiness"
-              onClick={handleAnswerChange}
-            >Market readiness</button>
-          </div>
-        </div>
-
-        <div className="quiz-question">
-          <p className="question-text">5. What shift is necessary for businesses adopting quantum technologies?</p>
-          <div className="options-container">
-            <button
-              className="quiz-option"
-              name="q5"
-              value="Cognitive shift"
-              onClick={handleAnswerChange}
-            >Cognitive shift</button>
-            <button
-              className="quiz-option"
-              name="q5"
-              value="Cultural shift"
-              onClick={handleAnswerChange}
-            >Cultural shift</button>
-            <button
-              className="quiz-option"
-              name="q5"
-              value="Technological shift"
-              onClick={handleAnswerChange}
-            >Technological shift</button>
-          </div>
-        </div>
-
-        <button onClick={checkAnswers} className="quiz-option">Submit Quiz</button>
+      <h1 className="module-title">Adopting Quantum in Business </h1>
+      <div className="progress-bar">
+        <div
+          className="progress"
+          style={{ width: `${((currentSection + 1) / sections.length) * 100}%` }}
+        ></div>
+      </div>
+      <div className="module-content">
+        <h2 className="section-title">{sections[currentSection].title}</h2>
+        {sections[currentSection].content}
+      </div>
+      <div className="navigation-buttons">
+        <button onClick={() => setCurrentSection((prev) => Math.max(prev - 1, 0))} disabled={currentSection === 0}>
+          Previous
+        </button>
+        <button onClick={() => setCurrentSection((prev) => Math.min(prev + 1, sections.length - 1))} disabled={currentSection === sections.length - 1}>
+          Next
+        </button>
+      </div>
+      <div className="module-navigation">
+        <Link to="/closing-activity" className="next-module-button">
+          Next Module: Closing Activity
+        </Link>
       </div>
     </div>
   );
