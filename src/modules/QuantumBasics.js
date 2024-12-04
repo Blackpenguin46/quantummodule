@@ -1,3 +1,4 @@
+// QuantumBasics.js
 import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import './QuantumBasics.css';
@@ -41,7 +42,13 @@ const Quiz = ({ questions }) => {
       {!quizSubmitted ? (
         <>
           <div className="quiz-progress">
-            Question {currentQuestion + 1} of {questions.length}
+            <div className="progress-bar">
+              <div
+                className="progress"
+                style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
+              ></div>
+            </div>
+            <span>Question {currentQuestion + 1} of {questions.length}</span>
           </div>
           <div className="quiz-question">
             <h3>{questions[currentQuestion].question}</h3>
@@ -51,7 +58,6 @@ const Quiz = ({ questions }) => {
                   key={i}
                   className={`quiz-option ${selectedAnswers[currentQuestion] === option ? 'selected' : ''}`}
                   onClick={() => handleOptionSelect(currentQuestion, option)}
-                  aria-pressed={selectedAnswers[currentQuestion] === option}
                 >
                   {option}
                 </button>
@@ -59,7 +65,11 @@ const Quiz = ({ questions }) => {
             </div>
           </div>
           <div className="quiz-navigation">
-            <button onClick={handlePreviousQuestion} disabled={currentQuestion === 0}>
+            <button 
+              className="nav-button"
+              onClick={handlePreviousQuestion} 
+              disabled={currentQuestion === 0}
+            >
               Previous
             </button>
             {currentQuestion === questions.length - 1 ? (
@@ -71,7 +81,10 @@ const Quiz = ({ questions }) => {
                 Submit Quiz
               </button>
             ) : (
-              <button onClick={handleNextQuestion}>
+              <button 
+                className="nav-button"
+                onClick={handleNextQuestion}
+              >
                 Next
               </button>
             )}
@@ -187,10 +200,18 @@ const QuantumBasics = () => {
         {sections[currentSection].content}
       </div>
       <div className="navigation-buttons">
-        <button onClick={() => setCurrentSection((prev) => Math.max(prev - 1, 0))} disabled={currentSection === 0}>
+        <button 
+          className="nav-button"
+          onClick={() => setCurrentSection((prev) => Math.max(prev - 1, 0))} 
+          disabled={currentSection === 0}
+        >
           Previous
         </button>
-        <button onClick={() => setCurrentSection((prev) => Math.min(prev + 1, sections.length - 1))} disabled={currentSection === sections.length - 1}>
+        <button 
+          className="nav-button"
+          onClick={() => setCurrentSection((prev) => Math.min(prev + 1, sections.length - 1))} 
+          disabled={currentSection === sections.length - 1}
+        >
           Next
         </button>
       </div>
@@ -202,7 +223,6 @@ const QuantumBasics = () => {
 };
 
 export default QuantumBasics;
-
 
 
 
