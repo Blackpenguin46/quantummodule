@@ -95,83 +95,68 @@ const BusinessAdoption = () => {
 
   const questions = [
     {
-      question: 'What is Quantum Computing?',
-      options: ['Classical Computing', 'Quantum Mechanics', 'Artificial Intelligence'],
-      correctAnswer: 'Quantum Mechanics',
+      question: 'What is a key benefit of quantum computing for businesses?',
+      options: ['Higher electricity usage', 'Efficient optimization', 'Slower computation speeds'],
+      correctAnswer: 'Efficient optimization',
     },
     {
-      question: 'What is a qubit?',
-      options: ['A bit in classical computing', 'A unit of data storage', 'A quantum bit'],
-      correctAnswer: 'A quantum bit',
+      question: 'How does quantum computing benefit supply chain management?',
+      options: ['Improves optimization and reduces costs', 'Slows down processes', 'Reduces storage needs'],
+      correctAnswer: 'Improves optimization and reduces costs',
     },
     {
-      question: 'What does superposition in quantum mechanics refer to?',
-      options: ['A particle being in two states at once', 'The probability of an event', 'Quantum entanglement'],
-      correctAnswer: 'A particle being in two states at once',
+      question: 'What industries benefit the most from quantum computing?',
+      options: ['Finance, logistics, and healthcare', 'Retail, farming, and tourism', 'Transportation only'],
+      correctAnswer: 'Finance, logistics, and healthcare',
     },
     {
-      question: 'Which algorithm is most associated with quantum computing?',
-      options: ['Shor\'s algorithm', 'RSA', 'AES'],
-      correctAnswer: 'Shor\'s algorithm',
+      question: 'Which area of business innovation can quantum computing enhance?',
+      options: ['Developing new materials', 'Traditional bookkeeping', 'Manual labor'],
+      correctAnswer: 'Developing new materials',
     },
     {
-      question: 'What is quantum entanglement?',
-      options: ['Particles separated by large distances are linked', 'A property of classical systems', 'A type of quantum interference'],
-      correctAnswer: 'Particles separated by large distances are linked',
+      question: 'What is a competitive advantage of adopting quantum computing early?',
+      options: ['Higher computation costs', 'Gaining a leadership position', 'Slower innovation'],
+      correctAnswer: 'Gaining a leadership position',
     },
   ];
 
   const sections = useMemo(
     () => [
       {
-        title: 'Risks of Quantum Computing',
+        title: 'Introduction to Business Adoption of Quantum Computing',
         content: (
           <div className="section-content">
             <p>
-              Quantum computing represents a revolutionary shift in computation, leveraging the principles of quantum mechanics to solve problems that are infeasible for classical computers.
-            </p>
-            <p>
-              Traditional computers process information as bits, which are in a state of either 0 or 1. Quantum computers, on the other hand, use <em>qubits</em>, which can exist in a superposition of 0 and 1 states simultaneously. This enables quantum computers to process vast amounts of information in parallel.
+              Quantum computing is transforming the business landscape, offering unprecedented opportunities to solve complex problems efficiently. By leveraging quantum computing, businesses can achieve competitive advantages, innovate rapidly, and optimize their operations in ways previously thought impossible.
             </p>
           </div>
         ),
       },
       {
-        title: 'Core Quantum Principles',
+        title: 'Business Benefits of Quantum Computing',
         content: (
           <div className="section-content">
-            <div className="accordion">
-              <div className="accordion-item">
-                <h3 className="accordion-header">Superposition</h3>
-                <div className="accordion-content">
-                  A quantum particle, like an electron, can exist in multiple states at once. In quantum computing, this means qubits can perform multiple calculations simultaneously.
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h3 className="accordion-header">Entanglement</h3>
-                <div className="accordion-content">
-                  When two particles become entangled, the state of one is instantly correlated with the state of the other, regardless of the distance between them. This allows for powerful interconnections in quantum systems.
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h3 className="accordion-header">Interference</h3>
-                <div className="accordion-content">
-                  Quantum computers use interference to amplify correct solutions while canceling out incorrect ones, improving computational accuracy.
-                </div>
-              </div>
-            </div>
-          </div>
-        ),
-      },
-      {
-        title: 'Applications of Quantum Computing',
-        content: (
-          <div className="section-content">
-            <p>Quantum computers are poised to revolutionize fields such as cryptography, optimization, drug discovery, and artificial intelligence. For instance:</p>
             <ul>
-              <li><strong>Cryptography:</strong> Quantum algorithms like Shor's algorithm can break widely used encryption systems, such as RSA, by efficiently factoring large numbers.</li>
-              <li><strong>Optimization:</strong> Quantum systems can solve complex optimization problems in logistics, finance, and engineering faster than classical approaches.</li>
-              <li><strong>Quantum Simulation:</strong> Simulating quantum systems is essential for advancing material science, chemistry, and physics research.</li>
+              <li><strong>Optimization:</strong> Quantum systems enhance decision-making in supply chain management, logistics, and resource allocation.</li>
+              <li><strong>Innovation:</strong> Businesses can develop new materials, drugs, and solutions using quantum simulations.</li>
+              <li><strong>Competitive Advantage:</strong> Early adopters of quantum computing can establish themselves as leaders in their industries.</li>
+              <li><strong>Data Security:</strong> With post-quantum cryptography, businesses can protect sensitive information and customer data.</li>
+            </ul>
+          </div>
+        ),
+      },
+      {
+        title: 'Industries Transforming with Quantum Computing',
+        content: (
+          <div className="section-content">
+            <p>
+              Quantum computing is driving advancements across various industries:
+            </p>
+            <ul>
+              <li><strong>Finance:</strong> Enhances risk analysis and portfolio optimization.</li>
+              <li><strong>Healthcare:</strong> Accelerates drug discovery and improves diagnostic tools.</li>
+              <li><strong>Logistics:</strong> Optimizes routes, inventory, and supply chains.</li>
             </ul>
           </div>
         ),
@@ -186,7 +171,7 @@ const BusinessAdoption = () => {
 
   return (
     <div className="quantum-basics-container">
-      <h1 className="module-title">Adopting Quantum in Business </h1>
+      <h1 className="module-title">Business Adoption of Quantum Computing</h1>
       <div className="progress-bar">
         <div
           className="progress"
@@ -217,6 +202,7 @@ const BusinessAdoption = () => {
 };
 
 export default BusinessAdoption;
+
 
 
 

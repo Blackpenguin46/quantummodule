@@ -95,89 +95,96 @@ const QuantumRisks = () => {
 
   const questions = [
     {
-      question: 'What is Quantum Computing?',
-      options: ['Classical Computing', 'Quantum Mechanics', 'Artificial Intelligence'],
-      correctAnswer: 'Quantum Mechanics',
+      question: 'What risk does quantum computing pose to current cryptography?',
+      options: [
+        'It can bypass encryption algorithms like AES.',
+        'It makes cryptographic keys insecure.',
+        'It introduces computational errors.',
+      ],
+      correctAnswer: 'It makes cryptographic keys insecure.',
     },
     {
-      question: 'What is a qubit?',
-      options: ['A bit in classical computing', 'A unit of data storage', 'A quantum bit'],
-      correctAnswer: 'A quantum bit',
-    },
-    {
-      question: 'What does superposition in quantum mechanics refer to?',
-      options: ['A particle being in two states at once', 'The probability of an event', 'Quantum entanglement'],
-      correctAnswer: 'A particle being in two states at once',
-    },
-    {
-      question: 'Which algorithm is most associated with quantum computing?',
-      options: ['Shor\'s algorithm', 'RSA', 'AES'],
+      question: 'Which quantum algorithm threatens RSA encryption?',
+      options: ['Shor\'s algorithm', 'Grover\'s algorithm', 'Dijkstra\'s algorithm'],
       correctAnswer: 'Shor\'s algorithm',
     },
     {
-      question: 'What is quantum entanglement?',
-      options: ['Particles separated by large distances are linked', 'A property of classical systems', 'A type of quantum interference'],
-      correctAnswer: 'Particles separated by large distances are linked',
+      question: 'What is a key challenge in creating quantum-safe cryptography?',
+      options: [
+        'Quantum systems are too expensive.',
+        'Quantum algorithms evolve rapidly.',
+        'New algorithms must withstand both classical and quantum attacks.',
+      ],
+      correctAnswer: 'New algorithms must withstand both classical and quantum attacks.',
+    },
+    {
+      question: 'How does quantum entanglement impact cybersecurity risks?',
+      options: [
+        'It increases secure communication.',
+        'It enables eavesdropping on secure channels.',
+        'It accelerates classical computations.',
+      ],
+      correctAnswer: 'It enables eavesdropping on secure channels.',
+    },
+    {
+      question: 'What is the primary limitation of quantum threats today?',
+      options: [
+        'Quantum computers are not widely available.',
+        'Quantum computers have no practical use cases.',
+        'Quantum physics lacks formal definition.',
+      ],
+      correctAnswer: 'Quantum computers are not widely available.',
     },
   ];
 
   const sections = useMemo(
     () => [
       {
-        title: 'Risks of Quantum Computing',
+        title: 'Overview of Quantum Risks',
         content: (
           <div className="section-content">
             <p>
-              Quantum computing represents a revolutionary shift in computation, leveraging the principles of quantum mechanics to solve problems that are infeasible for classical computers.
-            </p>
-            <p>
-              Traditional computers process information as bits, which are in a state of either 0 or 1. Quantum computers, on the other hand, use <em>qubits</em>, which can exist in a superposition of 0 and 1 states simultaneously. This enables quantum computers to process vast amounts of information in parallel.
+              Quantum computing introduces unprecedented risks to current cybersecurity systems. Its ability to solve
+              complex mathematical problems, which classical computers cannot efficiently tackle, poses a significant
+              threat to traditional encryption methods.
             </p>
           </div>
         ),
       },
       {
-        title: 'Core Quantum Principles',
+        title: 'Threats to Encryption',
         content: (
           <div className="section-content">
-            <div className="accordion">
-              <div className="accordion-item">
-                <h3 className="accordion-header">Superposition</h3>
-                <div className="accordion-content">
-                  A quantum particle, like an electron, can exist in multiple states at once. In quantum computing, this means qubits can perform multiple calculations simultaneously.
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h3 className="accordion-header">Entanglement</h3>
-                <div className="accordion-content">
-                  When two particles become entangled, the state of one is instantly correlated with the state of the other, regardless of the distance between them. This allows for powerful interconnections in quantum systems.
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h3 className="accordion-header">Interference</h3>
-                <div className="accordion-content">
-                  Quantum computers use interference to amplify correct solutions while canceling out incorrect ones, improving computational accuracy.
-                </div>
-              </div>
-            </div>
+            <p>
+              Quantum algorithms like Shor's algorithm can break public-key encryption, such as RSA and ECC. These
+              encryption schemes secure our financial systems, emails, and internet transactions. Without quantum-safe
+              alternatives, secure communication could become obsolete.
+            </p>
           </div>
         ),
       },
       {
-        title: 'Applications of Quantum Computing',
+        title: 'Challenges in Mitigating Risks',
         content: (
           <div className="section-content">
-            <p>Quantum computers are poised to revolutionize fields such as cryptography, optimization, drug discovery, and artificial intelligence. For instance:</p>
             <ul>
-              <li><strong>Cryptography:</strong> Quantum algorithms like Shor's algorithm can break widely used encryption systems, such as RSA, by efficiently factoring large numbers.</li>
-              <li><strong>Optimization:</strong> Quantum systems can solve complex optimization problems in logistics, finance, and engineering faster than classical approaches.</li>
-              <li><strong>Quantum Simulation:</strong> Simulating quantum systems is essential for advancing material science, chemistry, and physics research.</li>
+              <li>
+                <strong>Scalability:</strong> Creating quantum-resistant algorithms that remain secure under both
+                classical and quantum attacks.
+              </li>
+              <li>
+                <strong>Adoption:</strong> Transitioning legacy systems to quantum-safe protocols without disrupting
+                operations.
+              </li>
+              <li>
+                <strong>Cost:</strong> Implementing new cryptographic standards across industries.
+              </li>
             </ul>
           </div>
         ),
       },
       {
-        title: 'Quiz: Test Your Knowledge',
+        title: 'Quiz: Test Your Knowledge on Quantum Risks',
         content: <Quiz questions={questions} />,
       },
     ],
@@ -185,7 +192,7 @@ const QuantumRisks = () => {
   );
 
   return (
-    <div className="quantum-basics-container">
+    <div className="quantum-risks-container">
       <h1 className="module-title">Quantum Risks</h1>
       <div className="progress-bar">
         <div
@@ -201,14 +208,21 @@ const QuantumRisks = () => {
         <button onClick={() => setCurrentSection((prev) => Math.max(prev - 1, 0))} disabled={currentSection === 0}>
           Previous
         </button>
-        <button onClick={() => setCurrentSection((prev) => Math.min(prev + 1, sections.length - 1))} disabled={currentSection === sections.length - 1}>
+        <button
+          onClick={() => setCurrentSection((prev) => Math.min(prev + 1, sections.length - 1))}
+          disabled={currentSection === sections.length - 1}
+        >
           Next
         </button>
       </div>
       <div className="module-navigation">
-        <Link to="/quantum-basics" className="prev-module-button">Previous Module: Quantum Basics</Link>
+        <Link to="/quantum-basics" className="prev-module-button">
+          Previous Module: Quantum Basics
+        </Link>
         <div className="next-module-container">
-          <Link to="/quantum-safe-practices" className="next-module-button">Next Module: Quantum Safe Practices</Link>
+          <Link to="/quantum-safe-practices" className="next-module-button">
+            Next Module: Quantum Safe Practices
+          </Link>
         </div>
       </div>
     </div>
@@ -216,6 +230,7 @@ const QuantumRisks = () => {
 };
 
 export default QuantumRisks;
+
 
 
 

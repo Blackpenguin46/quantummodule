@@ -32,9 +32,10 @@ body {
   padding: 2rem;
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for separation */
   transition: transform 0.3s ease-in-out; /* Smooth sliding effect */
-  border-radius: 0; /* Remove rounding on all corners */
+  border-radius: 0 !important; /* Ensure no rounded corners */
   display: flex; /* Use flexbox to layout content */
   flex-direction: column; /* Stack sidebar content vertically */
+  overflow: hidden; /* Hide any overflow */
 }
 
 /* Sidebar Links */

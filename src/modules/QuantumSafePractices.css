@@ -44,6 +44,7 @@ body {
   margin-top: 2rem;
 }
 
+/* Quiz Title */
 .quiz-title {
   font-size: 1.8rem;
   color: #2a71d0;
@@ -54,7 +55,7 @@ body {
 
 /* Question Styles */
 .quiz-question {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .question-text {
@@ -67,15 +68,12 @@ body {
 /* Options Styling */
 .options-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  justify-content: center;
+  flex-direction: column;
+  gap: 16px; /* Added gap between options */
 }
 
 .quiz-option {
-  flex: 1 1 calc(50% - 12px); /* Adjust to fit two options per row */
-  max-width: calc(50% - 12px);
-  padding: 0.8rem 1rem;
+  padding: 1rem;
   background: #2a71d0; /* Blue for primary buttons */
   color: white;
   border: 2px solid transparent;
@@ -106,6 +104,12 @@ body {
   background-color: #e74c3c; /* Red for incorrect answers */
   color: white;
   border-color: #e74c3c;
+}
+
+.quiz-option.correct {
+  background-color: #4caf50; /* Green for correct answers */
+  color: white;
+  border-color: #4caf50;
 }
 
 /* Submit Button */
@@ -277,8 +281,8 @@ body {
   }
 
   .quiz-option {
-    flex: 1 1 calc(50% - 12px); /* Keep two options per row */
-    max-width: calc(50% - 12px);
+    flex: 1 1 calc(50% - 16px); /* Keep two options per row with more spacing */
+    max-width: calc(50% - 16px);
   }
 
   .submit-button,

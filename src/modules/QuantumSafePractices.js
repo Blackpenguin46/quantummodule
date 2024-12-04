@@ -95,84 +95,73 @@ const QuantumSafePractices = () => {
 
   const questions = [
     {
-      question: 'What is Quantum Computing?',
-      options: ['Classical Computing', 'Quantum Mechanics', 'Artificial Intelligence'],
-      correctAnswer: 'Quantum Mechanics',
+      question: 'What is the goal of quantum-safe cryptography?',
+      options: ['To use classical encryption methods', 'To ensure data security against quantum attacks', 'To enhance computing speed'],
+      correctAnswer: 'To ensure data security against quantum attacks',
     },
     {
-      question: 'What is a qubit?',
-      options: ['A bit in classical computing', 'A unit of data storage', 'A quantum bit'],
-      correctAnswer: 'A quantum bit',
+      question: 'What is a quantum-resistant algorithm?',
+      options: ['An algorithm only for quantum computers', 'A classical algorithm secure against quantum attacks', 'A weak encryption method'],
+      correctAnswer: 'A classical algorithm secure against quantum attacks',
     },
     {
-      question: 'What does superposition in quantum mechanics refer to?',
-      options: ['A particle being in two states at once', 'The probability of an event', 'Quantum entanglement'],
-      correctAnswer: 'A particle being in two states at once',
+      question: 'Which of the following is a quantum-safe algorithm?',
+      options: ['Shor\'s Algorithm', 'RSA', 'CRYSTALS-Dilithium'],
+      correctAnswer: 'CRYSTALS-Dilithium',
     },
     {
-      question: 'Which algorithm is most associated with quantum computing?',
-      options: ['Shor\'s algorithm', 'RSA', 'AES'],
-      correctAnswer: 'Shor\'s algorithm',
+      question: 'Why is transitioning to quantum-safe practices important?',
+      options: ['Quantum computers are widely available', 'Quantum computers could break current cryptography', 'Quantum computers make everything faster'],
+      correctAnswer: 'Quantum computers could break current cryptography',
     },
     {
-      question: 'What is quantum entanglement?',
-      options: ['Particles separated by large distances are linked', 'A property of classical systems', 'A type of quantum interference'],
-      correctAnswer: 'Particles separated by large distances are linked',
+      question: 'What is "Harvest Now, Decrypt Later"?',
+      options: ['Storing encrypted data to decrypt with quantum computers in the future', 'A new type of encryption method', 'A quantum computing principle'],
+      correctAnswer: 'Storing encrypted data to decrypt with quantum computers in the future',
     },
   ];
 
   const sections = useMemo(
     () => [
       {
-        title: 'Risks of Quantum Computing',
+        title: 'Introduction to Quantum-Safe Practices',
         content: (
           <div className="section-content">
             <p>
-              Quantum computing represents a revolutionary shift in computation, leveraging the principles of quantum mechanics to solve problems that are infeasible for classical computers.
-            </p>
-            <p>
-              Traditional computers process information as bits, which are in a state of either 0 or 1. Quantum computers, on the other hand, use <em>qubits</em>, which can exist in a superposition of 0 and 1 states simultaneously. This enables quantum computers to process vast amounts of information in parallel.
+              Quantum computing poses significant risks to current cryptographic systems. Quantum-safe practices involve developing and implementing cryptographic methods that remain secure even in the presence of quantum computing.
             </p>
           </div>
         ),
       },
       {
-        title: 'Core Quantum Principles',
+        title: 'Quantum-Resistant Algorithms',
         content: (
           <div className="section-content">
-            <div className="accordion">
-              <div className="accordion-item">
-                <h3 className="accordion-header">Superposition</h3>
-                <div className="accordion-content">
-                  A quantum particle, like an electron, can exist in multiple states at once. In quantum computing, this means qubits can perform multiple calculations simultaneously.
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h3 className="accordion-header">Entanglement</h3>
-                <div className="accordion-content">
-                  When two particles become entangled, the state of one is instantly correlated with the state of the other, regardless of the distance between them. This allows for powerful interconnections in quantum systems.
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h3 className="accordion-header">Interference</h3>
-                <div className="accordion-content">
-                  Quantum computers use interference to amplify correct solutions while canceling out incorrect ones, improving computational accuracy.
-                </div>
-              </div>
-            </div>
-          </div>
-        ),
-      },
-      {
-        title: 'Applications of Quantum Computing',
-        content: (
-          <div className="section-content">
-            <p>Quantum computers are poised to revolutionize fields such as cryptography, optimization, drug discovery, and artificial intelligence. For instance:</p>
+            <p>
+              Quantum-resistant algorithms are designed to resist attacks from quantum computers. These include lattice-based cryptography, multivariate cryptography, and hash-based cryptography.
+            </p>
             <ul>
-              <li><strong>Cryptography:</strong> Quantum algorithms like Shor's algorithm can break widely used encryption systems, such as RSA, by efficiently factoring large numbers.</li>
-              <li><strong>Optimization:</strong> Quantum systems can solve complex optimization problems in logistics, finance, and engineering faster than classical approaches.</li>
-              <li><strong>Quantum Simulation:</strong> Simulating quantum systems is essential for advancing material science, chemistry, and physics research.</li>
+              <li><strong>Lattice-based cryptography:</strong> Relies on the difficulty of lattice problems, such as those used in the NIST candidate CRYSTALS-Kyber.</li>
+              <li><strong>Hash-based cryptography:</strong> Relies on secure hash functions, such as SPHINCS+.</li>
             </ul>
+          </div>
+        ),
+      },
+      {
+        title: 'Transitioning to Quantum-Safe Infrastructure',
+        content: (
+          <div className="section-content">
+            <p>
+              Organizations must assess their current cryptographic infrastructure and plan migrations to quantum-safe algorithms. NIST's Post-Quantum Cryptography Standardization initiative provides guidance on future-ready algorithms.
+            </p>
+            <p>
+              Steps to transition:
+              <ol>
+                <li>Inventory current cryptographic systems.</li>
+                <li>Identify quantum-vulnerable components.</li>
+                <li>Adopt hybrid systems that combine classical and quantum-resistant algorithms.</li>
+              </ol>
+            </p>
           </div>
         ),
       },
@@ -216,6 +205,7 @@ const QuantumSafePractices = () => {
 };
 
 export default QuantumSafePractices;
+
 
 
 

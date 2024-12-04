@@ -101,65 +101,52 @@ const QuantumBasics = () => {
     },
     {
       question: 'What is a qubit?',
-      options: ['A bit in classical computing', 'A unit of data storage', 'A quantum bit'],
+      options: ['A classical bit', 'A quantum bit', 'A unit of data storage'],
       correctAnswer: 'A quantum bit',
     },
     {
-      question: 'What does superposition in quantum mechanics refer to?',
-      options: ['A particle being in two states at once', 'The probability of an event', 'Quantum entanglement'],
-      correctAnswer: 'A particle being in two states at once',
+      question: 'What does superposition refer to?',
+      options: ['A particle in one state', 'A particle in two states at once', 'Quantum entanglement'],
+      correctAnswer: 'A particle in two states at once',
     },
     {
-      question: 'Which algorithm is most associated with quantum computing?',
-      options: ['Shor\'s algorithm', 'RSA', 'AES'],
-      correctAnswer: 'Shor\'s algorithm',
+      question: 'What is entanglement in quantum mechanics?',
+      options: ['Particles that interact with light', 'Particles linked at a distance', 'A type of noise'],
+      correctAnswer: 'Particles linked at a distance',
     },
     {
-      question: 'What is quantum entanglement?',
-      options: ['Particles separated by large distances are linked', 'A property of classical systems', 'A type of quantum interference'],
-      correctAnswer: 'Particles separated by large distances are linked',
+      question: 'How can quantum computers outperform classical ones?',
+      options: [
+        'By faster electricity flow',
+        'By leveraging quantum principles like superposition',
+        'By increasing the CPU speed',
+      ],
+      correctAnswer: 'By leveraging quantum principles like superposition',
     },
   ];
 
   const sections = useMemo(
     () => [
       {
-        title: 'Quantum Basics',
+        title: 'Introduction to Quantum Computing',
         content: (
           <div className="section-content">
             <p>
-              Quantum computing represents a revolutionary shift in computation, leveraging the principles of quantum mechanics to solve problems that are infeasible for classical computers.
-            </p>
-            <p>
-              Traditional computers process information as bits, which are in a state of either 0 or 1. Quantum computers, on the other hand, use <em>qubits</em>, which can exist in a superposition of 0 and 1 states simultaneously. This enables quantum computers to process vast amounts of information in parallel.
+              Quantum computing leverages quantum mechanics to solve complex problems far beyond the capability of classical computers. At its core are qubits, which unlike classical bits, can represent both 0 and 1 simultaneously through superposition.
             </p>
           </div>
         ),
       },
       {
-        title: 'Core Quantum Principles',
+        title: 'Core Principles of Quantum Mechanics',
         content: (
           <div className="section-content">
-            <div className="accordion">
-              <div className="accordion-item">
-                <h3 className="accordion-header">Superposition</h3>
-                <div className="accordion-content">
-                  A quantum particle, like an electron, can exist in multiple states at once. In quantum computing, this means qubits can perform multiple calculations simultaneously.
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h3 className="accordion-header">Entanglement</h3>
-                <div className="accordion-content">
-                  When two particles become entangled, the state of one is instantly correlated with the state of the other, regardless of the distance between them. This allows for powerful interconnections in quantum systems.
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h3 className="accordion-header">Interference</h3>
-                <div className="accordion-content">
-                  Quantum computers use interference to amplify correct solutions while canceling out incorrect ones, improving computational accuracy.
-                </div>
-              </div>
-            </div>
+            <p>Quantum mechanics underpins quantum computing and includes principles like:</p>
+            <ul>
+              <li><strong>Superposition:</strong> Qubits can exist in multiple states, allowing parallel computation.</li>
+              <li><strong>Entanglement:</strong> Particles can be linked across distances, enabling powerful correlations.</li>
+              <li><strong>Interference:</strong> Quantum systems can amplify correct answers and cancel out incorrect ones.</li>
+            </ul>
           </div>
         ),
       },
@@ -167,11 +154,13 @@ const QuantumBasics = () => {
         title: 'Applications of Quantum Computing',
         content: (
           <div className="section-content">
-            <p>Quantum computers are poised to revolutionize fields such as cryptography, optimization, drug discovery, and artificial intelligence. For instance:</p>
+            <p>
+              Quantum computers have the potential to revolutionize various fields, including:
+            </p>
             <ul>
-              <li><strong>Cryptography:</strong> Quantum algorithms like Shor's algorithm can break widely used encryption systems, such as RSA, by efficiently factoring large numbers.</li>
-              <li><strong>Optimization:</strong> Quantum systems can solve complex optimization problems in logistics, finance, and engineering faster than classical approaches.</li>
-              <li><strong>Quantum Simulation:</strong> Simulating quantum systems is essential for advancing material science, chemistry, and physics research.</li>
+              <li><strong>Cryptography:</strong> Breaking encryption systems like RSA with Shor's algorithm.</li>
+              <li><strong>Optimization:</strong> Solving complex logistics or financial problems.</li>
+              <li><strong>Drug Discovery:</strong> Modeling molecules and reactions at a quantum level.</li>
             </ul>
           </div>
         ),
@@ -186,7 +175,7 @@ const QuantumBasics = () => {
 
   return (
     <div className="quantum-basics-container">
-      <h1 className="module-title">Quantum Risks</h1>
+      <h1 className="module-title">Quantum Basics</h1>
       <div className="progress-bar">
         <div
           className="progress"
@@ -206,10 +195,7 @@ const QuantumBasics = () => {
         </button>
       </div>
       <div className="module-navigation">
-        <Link to="/" className="prev-module-button">Previous Module: Main Page</Link>
-        <div className="next-module-container">
-          <Link to="/quantum-risks" className="next-module-button">Next Module: Quantum Risks</Link>
-        </div>
+        <Link to="/" className="prev-module-button">Return to Main Page</Link>
       </div>
     </div>
   );
