@@ -1,15 +1,16 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import Header from './components/layout/Header'
-import './globals.css'
-import { Suspense } from 'react'
-import Loading from './loading'
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
+import Header from "./components/layout/Header"
+import "./globals.css"
+import { Suspense } from "react"
+import Loading from "./loading"
+import type React from "react" // Import React
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: 'Quantum Learning Module',
-  description: 'Learn quantum computing concepts interactively',
+  title: "Quantum Learning Module",
+  description: "Learn quantum computing concepts interactively",
 }
 
 export default function RootLayout({
@@ -22,11 +23,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <Header />
         <main className="min-h-screen pt-16 bg-gray-50">
-          <Suspense fallback={<Loading />}>
-            {children}
-          </Suspense>
+          <Suspense fallback={<Loading />}>{children}</Suspense>
         </main>
       </body>
     </html>
   )
 }
+
