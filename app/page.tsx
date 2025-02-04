@@ -64,9 +64,19 @@ const modules = [
     progress: 30,
     status: 'Started',
     image: '/quantum-algorithms.jpg',
-    topics: ['Grover's Algorithm', 'Shor's Algorithm', 'Quantum Fourier Transform'],
+    topics: ["Grover Algorithm", "Shor Algorithm", "Quantum Fourier Transform"],
   },
-  // Add more modules as needed
+  {
+    id: 'quantum-applications',
+    title: 'Practical Applications',
+    description: 'Real-world applications of quantum computing',
+    duration: '4 hours',
+    lessons: 6,
+    progress: 0,
+    status: 'Not Started',
+    image: '/quantum-applications.jpg',
+    topics: ['Cryptography', 'Optimization', 'Machine Learning'],
+  }
 ]
 
 export default function Home() {
