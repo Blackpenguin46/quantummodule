@@ -4,45 +4,9 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { useState } from 'react'
 import Link from 'next/link'
 import MainLayout from './components/layout/MainLayout'
-import { FiClock, FiAward, FiBook, FiCode } from 'react-icons/fi'
 import { ProgressCircle } from './components/ui/ProgressCircle'
 
-// Dynamic background component with floating particles
-const ParticleBackground = () => {
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      {[...Array(30)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-blue-500/30 rounded-full"
-          initial={{ 
-            x: Math.random() * 100 + '%',
-            y: Math.random() * 100 + '%',
-            scale: Math.random() * 0.5 + 0.5,
-          }}
-          animate={{
-            x: [
-              Math.random() * 100 + '%',
-              Math.random() * 100 + '%',
-              Math.random() * 100 + '%'
-            ],
-            y: [
-              Math.random() * 100 + '%',
-              Math.random() * 100 + '%',
-              Math.random() * 100 + '%'
-            ]
-          }}
-          transition={{
-            duration: Math.random() * 20 + 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-      ))}
-    </div>
-  )
-}
-
+// Using basic emoji icons instead of react-icons for now
 const modules = [
   {
     id: 'quantum-basics',
@@ -53,6 +17,7 @@ const modules = [
     progress: 80,
     status: 'In Progress',
     image: '/quantum-basics.jpg',
+    icon: '⚛️',
     topics: ['Qubits', 'Superposition', 'Entanglement', 'Quantum Gates'],
   },
   {
@@ -64,6 +29,7 @@ const modules = [
     progress: 30,
     status: 'Started',
     image: '/quantum-algorithms.jpg',
+    icon: '🔄',
     topics: ["Grover Algorithm", "Shor Algorithm", "Quantum Fourier Transform"],
   },
   {
@@ -75,6 +41,7 @@ const modules = [
     progress: 0,
     status: 'Not Started',
     image: '/quantum-applications.jpg',
+    icon: '💻',
     topics: ['Cryptography', 'Optimization', 'Machine Learning'],
   }
 ]
@@ -101,10 +68,10 @@ export default function Home() {
             </p>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               {[
-                { label: 'Modules Completed', value: '2/8', icon: <FiBook /> },
-                { label: 'Time Spent', value: '4.5 hours', icon: <FiClock /> },
-                { label: 'Exercises Completed', value: '12', icon: <FiCode /> },
-                { label: 'Achievements', value: '3', icon: <FiAward /> },
+                { label: 'Modules Completed', value: '2/8', icon: '📚' },
+                { label: 'Time Spent', value: '4.5 hours', icon: '⏱️' },
+                { label: 'Exercises Completed', value: '12', icon: '✅' },
+                { label: 'Achievements', value: '3', icon: '🏆' },
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}
@@ -114,7 +81,7 @@ export default function Home() {
                   className="bg-white/5 rounded-xl p-4"
                 >
                   <div className="flex items-center gap-3 text-gray-400 mb-2">
-                    {stat.icon}
+                    <span className="text-xl">{stat.icon}</span>
                     <span className="text-sm">{stat.label}</span>
                   </div>
                   <div className="text-2xl font-bold text-white">{stat.value}</div>
@@ -152,11 +119,11 @@ export default function Home() {
 
                   <div className="grid grid-cols-2 gap-4 mb-4">
                     <div className="flex items-center gap-2 text-sm text-gray-400">
-                      <FiClock />
+                      <span>⏱️</span>
                       <span>{module.duration}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-400">
-                      <FiBook />
+                      <span>📚</span>
                       <span>{module.lessons} Lessons</span>
                     </div>
                   </div>
