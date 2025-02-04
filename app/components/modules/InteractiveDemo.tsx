@@ -1,11 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Chart } from 'react-chartjs-2'
+
+type DemoType = 'qubit-visualization' | 'quantum-circuit' | 'encryption-demo' | 'quantum-safe-demo'
 
 interface InteractiveDemoProps {
-  type: 'qubit-visualization' | 'quantum-circuit' | 'encryption-demo'
+  type: DemoType
   className?: string
 }
 
@@ -53,7 +54,30 @@ export default function InteractiveDemo({ type, className = '' }: InteractiveDem
           </div>
         )
       
-      // Add other demo types
+      case 'quantum-safe-demo':
+        return (
+          <div className="p-6 bg-white rounded-lg shadow">
+            <h3 className="text-xl font-semibold mb-4">Quantum-Safe Cryptography Demo</h3>
+            {/* Quantum safe demo content */}
+          </div>
+        )
+
+      case 'encryption-demo':
+        return (
+          <div className="p-6 bg-white rounded-lg shadow">
+            <h3 className="text-xl font-semibold mb-4">Encryption Demo</h3>
+            {/* Encryption demo content */}
+          </div>
+        )
+
+      case 'quantum-circuit':
+        return (
+          <div className="p-6 bg-white rounded-lg shadow">
+            <h3 className="text-xl font-semibold mb-4">Quantum Circuit</h3>
+            {/* Quantum circuit content */}
+          </div>
+        )
+      
       default:
         return null
     }
