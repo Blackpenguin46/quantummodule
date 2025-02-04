@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useProgress } from '@/app/hooks/useProgress'
+import { useProgress } from '../../hooks/useProgress'
 
 interface Section {
   id: string

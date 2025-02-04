@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Navigation from './Navigation'
-import { theme } from '@/app/styles/theme'
+import { theme } from '../../styles/theme'
 
 interface ModernLayoutProps {
   children: React.ReactNode

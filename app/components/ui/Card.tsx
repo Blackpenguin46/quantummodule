@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { theme } from '@/app/styles/theme'
+import { theme } from '../../styles/theme'
 
 interface CardProps {
   children: React.ReactNode

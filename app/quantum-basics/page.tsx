@@ -3,7 +3,7 @@
 import ModernLayout from '../components/layout/ModernLayout'
 import Card from '../components/ui/Card'
 import { motion } from 'framer-motion'
-import { theme } from '@/app/styles/theme'
+import { theme } from '../styles/theme'
 import ModuleViewer from '../components/modules/ModuleViewer'
 
 const sections = [
@@ -55,4 +55,4 @@ export default function QuantumBasics() {
       />
     </ModernLayout>
   )
-} 
+}  
