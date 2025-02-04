@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Card from './components/ui/Card'
+import MainLayout from './components/layout/MainLayout'
 
 // Dynamic background component with floating particles
 const ParticleBackground = () => {
@@ -108,8 +108,7 @@ export default function Home() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] text-white overflow-x-hidden">
-      {/* Enhanced Hero Section */}
+    <MainLayout>
       <div className="relative min-h-screen overflow-hidden">
         <ParticleBackground />
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
@@ -240,7 +239,7 @@ export default function Home() {
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Enhanced Features Section */}
       <div className="container mx-auto px-6 py-16">
@@ -294,6 +293,6 @@ export default function Home() {
           </div>
         </motion.div>
       </div>
-    </main>
+    </MainLayout>
   )
 } 
