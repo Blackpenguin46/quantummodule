@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply font-sans bg-gray-100 text-gray-800;
+    @apply font-sans bg-gray-100 text-gray-800 flex flex-col min-h-screen;
   }
 
   h1, h2, h3, h4 {
@@ -17,47 +17,71 @@
 }
 
 @layer components {
+  /* Full-width navbar with evenly spaced items */
+  .navbar {
+    @apply flex items-center justify-between px-8 py-4 bg-white shadow-md fixed top-0 w-full z-10;
+  }
+
+  .navbar-links {
+    @apply flex gap-6;
+  }
+
+  .navbar-link {
+    @apply text-gray-700 font-medium hover:text-blue-600 transition-colors;
+  }
+
+  /* Button styles */
   .btn-primary {
-    @apply px-5 py-2 bg-blue-600 text-white rounded-lg shadow-md
+    @apply px-6 py-2 bg-blue-600 text-white rounded-lg shadow-md 
            hover:bg-blue-700 hover:shadow-lg transition-all duration-200;
   }
 
   .btn-secondary {
-    @apply px-5 py-2 bg-gray-200 text-gray-800 rounded-lg shadow-md
-           hover:bg-gray-300 hover:shadow-lg transition-all duration-200;
+    @apply px-6 py-2 bg-gray-300 text-gray-800 rounded-lg shadow-md 
+           hover:bg-gray-400 hover:shadow-lg transition-all duration-200;
   }
 
+  /* Main content container */
+  .main-content {
+    @apply flex flex-col items-center justify-center flex-1 w-full max-w-6xl mx-auto px-6 pt-20;
+  }
+
+  /* Card layout */
   .card {
-    @apply bg-white rounded-lg shadow-md p-6 border border-gray-200;
+    @apply bg-white rounded-lg shadow-md p-6 border border-gray-200 w-full;
   }
 
-  .navbar {
-    @apply flex items-center justify-between p-4 bg-white shadow-sm mb-6;
+  .grid-layout {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full;
   }
 
-  .navbar-link {
-    @apply text-gray-600 hover:text-blue-600 transition-colors;
-  }
-
+  /* Progress bar */
   .progress-bar {
     @apply w-full bg-gray-300 rounded-full h-4 overflow-hidden;
   }
 
   .progress-bar-fill {
-    @apply bg-blue-600 h-full rounded-full transition-width duration-300;
+    @apply bg-blue-600 h-full rounded-full transition-all duration-300;
   }
 }
 
 @layer utilities {
+  /* Container to center content */
   .container {
-    @apply max-w-7xl mx-auto px-4;
+    @apply max-w-7xl mx-auto px-6;
   }
 
+  /* Page headings */
   .heading {
-    @apply text-2xl font-bold mb-4;
+    @apply text-3xl font-bold mb-6;
   }
 
   .subheading {
-    @apply text-xl font-semibold mb-2;
+    @apply text-xl font-semibold mb-4;
+  }
+
+  /* Spacing utility for layout */
+  .spaced-section {
+    @apply flex flex-col items-center space-y-6 py-8;
   }
 }
