@@ -2,13 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply font-sans bg-gray-100 text-gray-800;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-semibold text-gray-900;
+  }
+
+  a {
+    @apply text-blue-600 hover:text-blue-800 transition-colors;
+  }
+}
+
 @layer components {
   .btn-primary {
-    @apply px-4 py-2 bg-blue-600 text-white rounded-md 
-           hover:bg-blue-700 transition-colors;
+    @apply px-5 py-2 bg-blue-600 text-white rounded-lg shadow-md
+           hover:bg-blue-700 hover:shadow-lg transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply px-5 py-2 bg-gray-200 text-gray-800 rounded-lg shadow-md
+           hover:bg-gray-300 hover:shadow-lg transition-all duration-200;
   }
 
   .card {
-    @apply bg-white rounded-lg shadow-lg p-6;
+    @apply bg-white rounded-lg shadow-md p-6 border border-gray-200;
   }
-} 
+
+  .navbar {
+    @apply flex items-center justify-between p-4 bg-white shadow-sm mb-6;
+  }
+
+  .navbar-link {
+    @apply text-gray-600 hover:text-blue-600 transition-colors;
+  }
+
+  .progress-bar {
+    @apply w-full bg-gray-300 rounded-full h-4 overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply bg-blue-600 h-full rounded-full transition-width duration-300;
+  }
+}
+
+@layer utilities {
+  .container {
+    @apply max-w-7xl mx-auto px-4;
+  }
+
+  .heading {
+    @apply text-2xl font-bold mb-4;
+  }
+
+  .subheading {
+    @apply text-xl font-semibold mb-2;
+  }
+}
